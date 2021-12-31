@@ -1,0 +1,20 @@
+{
+  "hosting": {
+    "public": "functions",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "ssrapp"
+      }
+    ]
+  },
+  "emulators": {
+    "Functions": {
+      "port": "4001"
+    },
+    "hosting": {
+      "port": "4000"
+    }
+  }
+}
