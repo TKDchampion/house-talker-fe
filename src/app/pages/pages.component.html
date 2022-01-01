@@ -9,10 +9,12 @@
           <div class="header-menu-item">Logout</div>
         </div> -->
         <div class="d-flex">
-          <div class="header-menu-item" (click)="openModal(template)">
+          <div class="header-menu-item" (click)="openModal(template1)">
             Login
           </div>
-          <div class="header-menu-item">Sign</div>
+          <div class="header-menu-item" (click)="openModal(template2)">
+            Sign
+          </div>
         </div>
       </div>
     </div>
@@ -23,6 +25,16 @@
     </div>
   </div>
 </div>
-<ng-template #template>
-  <app-modal></app-modal>
+
+<ng-template #template1>
+  <app-modal title="Login">
+    <input type="text" />
+  </app-modal>
+</ng-template>
+
+<ng-template #template2>
+  <app-modal title="Sigin">
+    <input type="text" />
+    <input type="text" />
+  </app-modal>
 </ng-template>
