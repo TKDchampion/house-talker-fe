@@ -1,0 +1,11 @@
+.body-box {
+  box-shadow: 0 2px 2px rgb(0 0 0 / 15%);
+  border-top: 4px solid #3f5fc3;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  border-radius: 0.55rem !important;
+  min-width: 330px;
+  margin: 10px;
+  min-height: 180px;
+}

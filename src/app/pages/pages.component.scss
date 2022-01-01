@@ -1,0 +1,39 @@
+.header-bar {
+  background-color: #3f5fc3;
+  border-color: #2e499d;
+  box-shadow: 0 2px 5px rgb(0 0 0 / 45%);
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+  padding: 0.5rem 1rem;
+  height: 64px;
+  font-size: 22px;
+  color: #ffffff;
+  font-weight: 600;
+  line-height: 45px;
+}
+
+.header-menu {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.header-menu-item {
+  margin: 0 10px;
+  &:hover {
+    text-shadow: 2px 2px 0 #000;
+    cursor: pointer;
+  }
+
+  &.active {
+    text-shadow: 2px 2px 0 #000;
+  }
+}
+
+.body {
+  min-height: 100vh;
+  background: linear-gradient(#3f5fc3, #f2f3f9 240px);
+  padding-top: 100px;
+}
