@@ -69,9 +69,18 @@
   transform: translateX(-13px) translateY(-35px);
   font-size: 1em;
 }
-.center .inputbox [type="button"] {
-  width: 50%;
-  background: dodgerblue;
+.center .inputbox button {
+  height: 50px;
+  font-size: 20px;
+  border-radius: 10px;
+  background: #3f5fc3;
   color: #fff;
   border: #fff;
+  &:hover {
+    background: dodgerblue;
+  }
+}
+
+.error-message {
+  color: #e30000;
 }

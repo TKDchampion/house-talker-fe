@@ -1,5 +1,12 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { NgxSpinnerService } from 'ngx-spinner';
+import {
+  LoginInfo,
+  LoginParam,
+  LoginService,
+} from 'src/services/login.service';
 import { StorageService } from '../core/services/storage.service';
 
 @Component({
@@ -9,20 +16,49 @@ import { StorageService } from '../core/services/storage.service';
 })
 export class PagesComponent implements OnInit {
   modalRef?: BsModalRef;
+  errorMessage = '';
+  loginForm = this.formBuilder.group({
+    account: ['', Validators.required],
+    password: ['', Validators.required],
+  });
+
   constructor(
     private modalService: BsModalService,
-    private storage: StorageService
-  ) {
-    // todo
-    this.storage.set(
-      'user',
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjMyMzYyMTQ4LCJqdGkiOiJjYjE3MTNhYTFjMTY0NWQxOGIyZWU1ZTViZGUzNzg0NiIsInVzZXJfaWQiOjF9.c8deV_918lhoD3acPP9pqq7s4uE_LfL3x3bEi9W15Iw'
-    );
-  }
+    private storage: StorageService,
+    private loginService: LoginService,
+    private formBuilder: FormBuilder,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit(): void {}
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+  }
+
+  onLoginSubmit() {
+    this.errorMessage = this.loginForm.status === 'INVALID' ? '格式錯誤' : '';
+    if (this.loginForm.status === 'VALID') {
+      this.spinner.show();
+      const param: LoginParam = this.loginForm.value;
+      this.loginService.login(param).subscribe(
+        (resp) => {
+          this.setPersonal(resp);
+          this.spinner.hide();
+          this.modalRef?.hide();
+        },
+        (error) => {
+          this.spinner.hide();
+          this.errorMessage = '帳密錯誤';
+        }
+      );
+    }
+  }
+
+  private setPersonal(info: LoginInfo) {
+    this.storage.set('access_token', info.access_token);
+    this.storage.set('account', info.account);
+    this.storage.set('nickName', info.nickName);
+    this.storage.set('userId', info.userId);
   }
 }

@@ -13,6 +13,6 @@ export declare class LoggerOptions {
 export interface HttpRequestOptions {
   headers?: Record<string, unknown>;
   queryObject?: Record<string, unknown>;
-  body?: Record<string, unknown>;
+  body?: Record<string, any>;
   baseURL?: string;
 }

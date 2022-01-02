@@ -28,17 +28,20 @@
 
 <ng-template #template1>
   <app-modal title="Login">
-    <form class="center">
+    <form class="center" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
       <div class="inputbox">
-        <input type="text" required="required" />
+        <input type="text" name="email" formControlName="account" />
         <span>Email</span>
       </div>
       <div class="inputbox">
-        <input type="text" required="required" />
+        <input type="text" name="password" formControlName="password" />
         <span>Password</span>
       </div>
       <div class="inputbox center-margin">
-        <input class="w-100" type="button" value="submit" />
+        <button class="w-100" type="submit">submit</button>
+        <div *ngIf="!!errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
       </div>
     </form>
   </app-modal>
@@ -50,3 +53,5 @@
     <input type="text" />
   </app-modal>
 </ng-template>
+
+<ngx-spinner></ngx-spinner>

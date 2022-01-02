@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { HttpDefaultOptions, JWTOptions } from './core/model/option';
 import { environment } from 'src/environments/environment';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JWTInterceptor } from './core/interceptor/jwt-interceptor';
 
 export class DKSHitHttpDefaultOptions extends HttpDefaultOptions {
@@ -16,7 +16,7 @@ export class DKSHitHttpDefaultOptions extends HttpDefaultOptions {
 }
 
 export class DKSHJWTOptions extends JWTOptions {
-  key = 'user';
+  key = 'access_token';
 }
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +26,7 @@ export class DKSHJWTOptions extends JWTOptions {
     BsDropdownModule.forRoot(),
     BrowserAnimationsModule,
     ModalModule.forRoot(),
+    HttpClientModule,
   ],
   providers: [
     {
