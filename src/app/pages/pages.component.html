@@ -28,7 +28,19 @@
 
 <ng-template #template1>
   <app-modal title="Login">
-    <input type="text" />
+    <form class="center">
+      <div class="inputbox">
+        <input type="text" required="required" />
+        <span>Email</span>
+      </div>
+      <div class="inputbox">
+        <input type="text" required="required" />
+        <span>Password</span>
+      </div>
+      <div class="inputbox center-margin">
+        <input class="w-100" type="button" value="submit" />
+      </div>
+    </form>
   </app-modal>
 </ng-template>
 
