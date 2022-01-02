@@ -21,6 +21,7 @@ export class PagesComponent implements OnInit {
     account: ['', Validators.required],
     password: ['', Validators.required],
   });
+  isLogin = false;
 
   constructor(
     private modalService: BsModalService,
@@ -28,7 +29,9 @@ export class PagesComponent implements OnInit {
     private loginService: LoginService,
     private formBuilder: FormBuilder,
     private spinner: NgxSpinnerService
-  ) {}
+  ) {
+    this.isLogin = this.storage && this.storage.hasItem('access_token');
+  }
 
   ngOnInit(): void {}
 
@@ -49,10 +52,16 @@ export class PagesComponent implements OnInit {
         },
         (error) => {
           this.spinner.hide();
+          this.isLogin = false;
           this.errorMessage = '帳密錯誤';
         }
       );
     }
+  }
+
+  logout() {
+    this.storage.clear();
+    this.isLogin = false;
   }
 
   private setPersonal(info: LoginInfo) {
@@ -60,5 +69,6 @@ export class PagesComponent implements OnInit {
     this.storage.set('account', info.account);
     this.storage.set('nickName', info.nickName);
     this.storage.set('userId', info.userId);
+    this.isLogin = true;
   }
 }
