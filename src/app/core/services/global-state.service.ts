@@ -8,7 +8,10 @@ import { Subject } from 'rxjs';
 })
 export abstract class GlobalStateService {
   private data = new Subject();
-  private subscriptions: Map<string, EventItem[]> = new Map<string, EventItem[]>();
+  private subscriptions: Map<string, EventItem[]> = new Map<
+    string,
+    EventItem[]
+  >();
   private dataStream$ = this.data.asObservable();
   private previous = 0;
   constructor() {
@@ -26,7 +29,10 @@ export abstract class GlobalStateService {
     }
   }
 
-  subscribe(event: string, callback: (value: any) => void): EventItemSubscription {
+  subscribe(
+    event: string,
+    callback: (value: any) => void
+  ): EventItemSubscription {
     const subscribers = this.subscriptions.get(event) || [];
     const uniqueId = this.getUniqueID();
     subscribers.push({ id: uniqueId, cb: callback });
@@ -64,7 +70,7 @@ export abstract class GlobalStateService {
       }
 
       return date;
-    } catch (e) {
+    } catch (e: any) {
       console.log('getUniqueID error:' + e.message + '.');
       return 0;
     }

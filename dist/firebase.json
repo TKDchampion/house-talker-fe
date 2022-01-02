@@ -10,9 +10,6 @@
     ]
   },
   "emulators": {
-    "Functions": {
-      "port": "4001"
-    },
     "hosting": {
       "port": "4000"
     }
