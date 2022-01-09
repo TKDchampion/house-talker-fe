@@ -42,16 +42,10 @@
   </div>
   <div class="col-xl-8">
     <app-box>
-      <app-list-item></app-list-item>
-      <app-list-item></app-list-item>
-      <app-list-item></app-list-item>
-      <app-list-item></app-list-item>
-      <app-list-item></app-list-item>
-      <app-list-item></app-list-item>
-      <app-list-item></app-list-item>
-      <app-list-item></app-list-item>
-      <app-list-item></app-list-item>
-      <app-list-item></app-list-item>
+      <app-list-item
+        *ngFor="let item of articlesList"
+        [setting]="item"
+      ></app-list-item>
     </app-box>
   </div>
 </div>
