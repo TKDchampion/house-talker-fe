@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
     this.articleService
       .getAllNewsArticles()
       .subscribe((resp: ArticleInfo[]) => {
-        console.log(resp);
         this.articlesList = resp;
       });
   }

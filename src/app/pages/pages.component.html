@@ -28,9 +28,13 @@
 
 <ng-template #template1>
   <app-modal title="Login">
-    <form class="center" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+    <form
+      class="center"
+      [formGroup]="loginForm"
+      (ngSubmit)="onLoginSingSubmit(loginForm, true)"
+    >
       <div class="inputbox">
-        <input type="text" name="email" formControlName="account" />
+        <input type="email" name="email" formControlName="account" />
         <span>Email</span>
       </div>
       <div class="inputbox">
@@ -49,8 +53,30 @@
 
 <ng-template #template2>
   <app-modal title="Sigin">
-    <input type="text" />
-    <input type="text" />
+    <form
+      class="center"
+      [formGroup]="signForm"
+      (ngSubmit)="onLoginSingSubmit(signForm, false)"
+    >
+      <div class="inputbox">
+        <input type="email" name="email" formControlName="account" />
+        <span>Email</span>
+      </div>
+      <div class="inputbox">
+        <input type="text" name="password" formControlName="password" />
+        <span>Password</span>
+      </div>
+      <div class="inputbox">
+        <input type="text" name="nickName" formControlName="nickName" />
+        <span>Nick name</span>
+      </div>
+      <div class="inputbox center-margin">
+        <button class="w-100" type="submit">submit</button>
+        <div *ngIf="!!errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
+      </div>
+    </form>
   </app-modal>
 </ng-template>
 

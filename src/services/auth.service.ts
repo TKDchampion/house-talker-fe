@@ -7,14 +7,24 @@ import { BaseService } from 'src/app/core/services/base.service';
 @Injectable({
   providedIn: 'root',
 })
-export class LoginService extends BaseService {
+export class AuthService extends BaseService {
   constructor(http: HttpClient, options: HttpDefaultOptions) {
     super(http, options);
   }
 
-  login(info: LoginParam): Observable<LoginInfo> {
-    return this.post('login', { body: info });
+  login(param: LoginParam): Observable<LoginInfo> {
+    return this.post('login', { body: param });
   }
+
+  sign(param: SingParam) {
+    return this.post('signUp', { body: param });
+  }
+}
+
+export interface SingParam {
+  account: string;
+  password: string;
+  nickName: string;
 }
 
 export interface LoginParam {

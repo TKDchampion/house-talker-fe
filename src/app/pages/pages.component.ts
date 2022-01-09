@@ -5,8 +5,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import {
   LoginInfo,
   LoginParam,
-  LoginService,
-} from 'src/services/login.service';
+  AuthService,
+  SingParam,
+} from 'src/services/auth.service';
 import { StorageService } from '../core/services/storage.service';
 
 @Component({
@@ -21,12 +22,18 @@ export class PagesComponent implements OnInit {
     account: ['', Validators.required],
     password: ['', Validators.required],
   });
+
+  signForm = this.formBuilder.group({
+    account: ['', Validators.required],
+    password: ['', Validators.required],
+    nickName: ['', Validators.required],
+  });
   isLogin = false;
 
   constructor(
     private modalService: BsModalService,
     private storage: StorageService,
-    private loginService: LoginService,
+    private authService: AuthService,
     private formBuilder: FormBuilder,
     private spinner: NgxSpinnerService
   ) {
@@ -39,29 +46,51 @@ export class PagesComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  onLoginSubmit() {
-    this.errorMessage = this.loginForm.status === 'INVALID' ? '格式錯誤' : '';
-    if (this.loginForm.status === 'VALID') {
-      this.spinner.show();
-      const param: LoginParam = this.loginForm.value;
-      this.loginService.login(param).subscribe(
-        (resp) => {
-          this.setPersonal(resp);
-          this.spinner.hide();
-          this.modalRef?.hide();
-        },
-        (error) => {
-          this.spinner.hide();
-          this.isLogin = false;
-          this.errorMessage = '帳密錯誤';
-        }
-      );
-    }
-  }
-
   logout() {
     this.storage.clear();
     this.isLogin = false;
+  }
+
+  onLoginSingSubmit(
+    form: { status: string; value: LoginParam },
+    isLogin: boolean
+  ) {
+    this.errorMessage = form.status === 'INVALID' ? '格式錯誤' : '';
+    if (form.status === 'VALID') {
+      this.spinner.show();
+      isLogin ? this.login(form) : this.sign(form);
+    }
+  }
+
+  private sign(form: { status?: string; value: any }) {
+    const param: SingParam = form.value;
+    this.authService.sign(param).subscribe(
+      (resp) => {
+        console.log('Success!!');
+        this.spinner.hide();
+        this.modalRef?.hide();
+      },
+      (error) => {
+        this.spinner.hide();
+        this.errorMessage = '系統忙線';
+      }
+    );
+  }
+
+  private login(form: { status?: string; value: any }) {
+    const param: LoginParam = form.value;
+    this.authService.login(param).subscribe(
+      (resp) => {
+        this.setPersonal(resp);
+        this.spinner.hide();
+        this.modalRef?.hide();
+      },
+      (error) => {
+        this.spinner.hide();
+        this.isLogin = false;
+        this.errorMessage = '帳密錯誤';
+      }
+    );
   }
 
   private setPersonal(info: LoginInfo) {
