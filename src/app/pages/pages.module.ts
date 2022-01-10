@@ -6,9 +6,10 @@ import { CommonToolModule } from '../common/common-tool.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
-  declarations: [PagesComponent],
+  declarations: [PagesComponent, ProfileComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,
