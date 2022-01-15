@@ -15,6 +15,10 @@ export class ArticleService extends BaseService {
   getAllNewsArticles(): Observable<ArticleInfo[]> {
     return this.get('getAllNewsArticles');
   }
+
+  getArticleForUser(): Observable<ArticleInfo[]> {
+    return this.get('getArticeForUser');
+  }
 }
 
 export interface ArticleInfo {

@@ -1,8 +1,22 @@
 <div class="profile-box">
   <div class="profile-box-messages">
-    <div class="profile-box-messages-item"><span>Email :</span></div>
-    <div class="profile-box-messages-item"><span>Nick namw :</span></div>
-    <div class="profile-box-messages-item"><span>Total articles</span></div>
+    <div class="profile-box-messages-item">
+      <span>Email : {{ profile?.email }}</span>
+    </div>
+    <div class="profile-box-messages-item">
+      <span>Nick name : {{ profile?.nickName }}</span>
+    </div>
+    <div
+      class="profile-box-messages-item d-flex justify-content-between flex-wrap"
+    >
+      <span>Total articles : {{ profile?.count }}</span>
+      <button type="button" class="btn btn-info btn-sm">Create Article</button>
+    </div>
+    <div></div>
   </div>
+  <app-list-item
+    *ngFor="let item of articlesList"
+    [setting]="item"
+  ></app-list-item>
   <div class="profile-box-articles"></div>
 </div>
