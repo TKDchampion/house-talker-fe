@@ -13,6 +13,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./home/home.module').then((m) => m.HomeModule),
       },
+      {
+        path: 'article-page',
+        loadChildren: () =>
+          import('./article-edit-create/article-edit-create.module').then(
+            (m) => m.ArticleEditCreateModule
+          ),
+      },
     ],
   },
 ];

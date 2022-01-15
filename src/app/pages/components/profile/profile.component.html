@@ -10,7 +10,13 @@
       class="profile-box-messages-item d-flex justify-content-between flex-wrap"
     >
       <span>Total articles : {{ profile?.count }}</span>
-      <button type="button" class="btn btn-info btn-sm">Create Article</button>
+      <button
+        type="button"
+        class="btn btn-info btn-sm"
+        (click)="createArticle()"
+      >
+        Create Article
+      </button>
     </div>
     <div></div>
   </div>

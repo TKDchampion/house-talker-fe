@@ -1,7 +1,9 @@
+import { Router } from '@angular/router';
 import { ArticleInfo, ArticleService } from 'src/services/article.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { StorageService } from 'src/app/core/services/storage.service';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-profile',
@@ -9,6 +11,7 @@ import { StorageService } from 'src/app/core/services/storage.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+  @Input() modalRef?: BsModalRef;
   articlesList: ArticleInfo[] = [];
   profile = {
     nickName: '',
@@ -19,7 +22,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private articleService: ArticleService,
     private spinner: NgxSpinnerService,
-    private storage: StorageService
+    private storage: StorageService,
+    private router: Router
   ) {
     this.getArticleList();
   }
@@ -36,5 +40,10 @@ export class ProfileComponent implements OnInit {
       this.profile.count = resp.length;
       this.spinner.hide();
     });
+  }
+
+  createArticle() {
+    this.router.navigate(['/app/article-page']);
+    this.modalRef?.hide();
   }
 }

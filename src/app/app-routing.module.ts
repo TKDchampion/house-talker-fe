@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'houstalker', pathMatch: 'full' },
+  { path: '', redirectTo: 'app', pathMatch: 'full' },
   {
-    path: 'houstalker',
+    path: 'app',
     loadChildren: () =>
       import('./pages/pages.module').then((m) => m.PagesModule),
   },
