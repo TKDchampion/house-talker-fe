@@ -1,1 +1,30 @@
-<p>article-edit-create works!</p>
+<form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label class="form-label">標題</label>
+    <input type="text" class="form-control" formControlName="title" />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">摘要</label>
+    <input type="text" class="form-control" formControlName="description" />
+    <div class="form-text">摘要必須至少15個字。</div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">地理位置</label>
+    <div class="d-flex">
+      <select class="form-select" formControlName="cityName">
+        <option>城市</option>
+      </select>
+      <select class="form-select">
+        <option>地區</option>
+      </select>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">提示</label>
+    <input type="text" class="form-control" formControlName="tips" />
+    <div class="form-text">
+      可輸入一些關鍵字來暗示，例如可以輸入學校、仲介、Ｘ先生或更詳細地址等...。
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary mt-3">Submit</button>
+</form>
