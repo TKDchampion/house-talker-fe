@@ -13,6 +13,12 @@ export class ArticleService extends ErrorServiceService {
     super(http, options, router);
   }
 
+  getArticleDetail(id: string): Observable<ArticleDetailInfo> {
+    return this.get('getDetailsArticle', {
+      queryObject: { articleId: id },
+    });
+  }
+
   getAllNewsArticles(): Observable<ArticleInfo[]> {
     return this.get('getAllNewsArticles');
   }
@@ -39,7 +45,19 @@ export interface CreateArticleParams {
 
 export interface ArticleInfo {
   time: string;
-  summaryContnet: string;
+  summaryContent: string;
+  location: string;
+  articleId: string;
+  userId: string;
+  nickName: string;
+  tips: string;
+  title: string;
+}
+
+export interface ArticleDetailInfo {
+  time: string;
+  summaryContent: string;
+  content: string;
   location: string;
   articleId: string;
   userId: string;

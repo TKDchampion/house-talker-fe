@@ -45,6 +45,7 @@
       <app-list-item
         *ngFor="let item of articlesList"
         [setting]="item"
+        (click)="goDetailArticle(item)"
       ></app-list-item>
     </app-box>
   </div>

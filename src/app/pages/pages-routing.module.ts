@@ -20,6 +20,20 @@ const routes: Routes = [
             (m) => m.ArticleEditCreateModule
           ),
       },
+      {
+        path: 'article-detail',
+        loadChildren: () =>
+          import('./article-detail/article-detail.module').then(
+            (m) => m.ArticleDetailModule
+          ),
+      },
+      {
+        path: 'article-detail/:id',
+        loadChildren: () =>
+          import('./article-detail/article-detail.module').then(
+            (m) => m.ArticleDetailModule
+          ),
+      },
     ],
   },
 ];
