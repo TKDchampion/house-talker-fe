@@ -16,6 +16,7 @@ export class ArticleEditCreateComponent implements OnInit {
     districts: [''],
     tips: [''],
   });
+
   constructor(public fb: FormBuilder) {}
 
   ngOnInit(): void {}
