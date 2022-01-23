@@ -1,4 +1,4 @@
-const cityData = [
+export const cityData = [
   {
     districts: [
       {
@@ -1616,3 +1616,8 @@ const cityData = [
     name: '花蓮縣',
   },
 ];
+
+export interface District {
+  zip: string;
+  name: string;
+}
