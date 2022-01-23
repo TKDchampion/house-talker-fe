@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -30,7 +31,8 @@ export class ArticleEditCreateComponent implements OnInit {
     private fb: FormBuilder,
     private storage: StorageService,
     private articleService: ArticleService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -44,25 +46,20 @@ export class ArticleEditCreateComponent implements OnInit {
 
   getEditorInstance(editorInstance: any) {
     this.quill = editorInstance;
-    let toolbar = editorInstance.getModule('toolbar');
+    const toolbar = editorInstance.getModule('toolbar');
     toolbar.addHandler('image', this.showImage);
     toolbar.addHandler('link', this.showlink);
-    toolbar.addHandler('video', this.showlink);
   }
 
   showlink() {
-    var range = this.quill.getSelection();
-    var value = prompt('please copy paste the image url here.');
+    const range = this.quill.getSelection();
+    const text = this.quill.getText(
+      range.index,
+      range.index + (range.length - 1)
+    );
+    const value = prompt('please copy paste the image url here.');
     if (value) {
-      this.quill.insertEmbed(range.index, 'link', value);
-    }
-  }
-
-  showVideo() {
-    var range = this.quill.getSelection();
-    var value = prompt('please copy paste the image url here.');
-    if (value) {
-      this.quill.insertEmbed(range.index, 'video', value);
+      this.quill.insertText(range, text, 'link', value);
     }
   }
 
@@ -90,8 +87,8 @@ export class ArticleEditCreateComponent implements OnInit {
 
       this.articleService.createArticle(createParam).subscribe(
         () => {
+          this.router.navigate(['/app']);
           this.spinner.hide();
-          alert('Save Success!!!');
         },
         () => {
           this.spinner.hide();

@@ -4,6 +4,7 @@ import { ArticleEditCreateComponent } from './article-edit-create.component';
 import { ArticleEditCreateRoutingModule } from './article-edit-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { QuillModule } from 'ngx-quill';
+import { CommonToolModule } from 'src/app/common/common-tool.module';
 
 @NgModule({
   declarations: [ArticleEditCreateComponent],
@@ -12,6 +13,7 @@ import { QuillModule } from 'ngx-quill';
     ArticleEditCreateRoutingModule,
     ReactiveFormsModule,
     QuillModule.forRoot(),
+    CommonToolModule,
   ],
 })
 export class ArticleEditCreateModule {}

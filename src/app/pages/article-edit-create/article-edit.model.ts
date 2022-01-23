@@ -1642,6 +1642,6 @@ export const quillSetting = {
 
     // ['clean'], // remove formatting button
 
-    ['link', 'image', 'video'], // link and image, video
+    ['link', 'image'], // link and image, video
   ],
 };
