@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -35,7 +36,8 @@ export class PagesComponent implements OnInit {
     private storage: StorageService,
     private authService: AuthService,
     private formBuilder: FormBuilder,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private router: Router
   ) {
     this.isLogin = this.storage && this.storage.hasItem('access_token');
   }
@@ -49,6 +51,7 @@ export class PagesComponent implements OnInit {
   logout() {
     this.storage.clear();
     this.isLogin = false;
+    this.router.navigate(['app']);
   }
 
   onLoginSingSubmit(
@@ -65,12 +68,12 @@ export class PagesComponent implements OnInit {
   private sign(form: { status?: string; value: any }) {
     const param: SingParam = form.value;
     this.authService.sign(param).subscribe(
-      (resp) => {
+      () => {
         console.log('Success!!');
         this.spinner.hide();
         this.modalRef?.hide();
       },
-      (error) => {
+      () => {
         this.spinner.hide();
         this.errorMessage = '系統忙線';
       }

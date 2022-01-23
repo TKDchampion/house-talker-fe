@@ -2,14 +2,15 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpDefaultOptions } from 'src/app/core/model/option';
-import { BaseService } from 'src/app/core/services/base.service';
+import { Router } from '@angular/router';
+import { ErrorServiceService } from 'src/app/core/services/error-service.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService extends BaseService {
-  constructor(http: HttpClient, options: HttpDefaultOptions) {
-    super(http, options);
+export class AuthService extends ErrorServiceService {
+  constructor(http: HttpClient, options: HttpDefaultOptions, router: Router) {
+    super(http, options, router);
   }
 
   login(param: LoginParam): Observable<LoginInfo> {
