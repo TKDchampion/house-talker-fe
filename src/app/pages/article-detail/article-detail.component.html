@@ -1,9 +1,16 @@
 <app-box>
-  <div class="d-flex justify-content-between">
-    <h1>{{ article?.title }}</h1>
-    <div>{{ article?.nickName }} • {{ article?.time }}</div>
+  <div class="article-box">
+    <div class="d-flex justify-content-between">
+      <h1>{{ article?.title }}</h1>
+      <div>{{ article?.nickName }} • {{ article?.time }}</div>
+    </div>
+    <div class="tips">{{ article?.location }} • {{ article?.tips }}</div>
+    <div class="subtitle">{{ article?.summaryContent }}</div>
+    <div class="content" [innerHTML]="article?.content"></div>
   </div>
-  <div class="tips">{{ article?.location }} • {{ article?.tips }}</div>
-  <div class="subtitle">{{ article?.summaryContent }}</div>
-  <div class="content" [innerHTML]="article?.content"></div>
+
+  <div class="messages">
+    <div class="speech-bubble-right">我自己的留言</div>
+    <div class="speech-bubble-left">別人的留言</div>
+  </div>
 </app-box>

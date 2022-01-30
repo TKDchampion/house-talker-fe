@@ -9,3 +9,42 @@
   font-size: 18px;
   font-weight: 200;
 }
+
+.messages {
+  margin-top: 60px;
+}
+
+.speech-bubble-right,
+.speech-bubble-left {
+  position: relative;
+  background: #00aabb;
+  border-radius: 0.4em;
+  min-height: 100px;
+  margin: 20px;
+}
+
+.speech-bubble-right:after,
+.speech-bubble-left:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 20px solid transparent;
+  border-bottom: 0;
+  margin-top: -10px;
+}
+
+.speech-bubble-right:after {
+  right: 0;
+  border-right: 0;
+  margin-right: -20px;
+  border-left-color: #00aabb;
+}
+
+.speech-bubble-left:after {
+  left: 0;
+  border-left: 0;
+  margin-left: -20px;
+  border-right-color: #00aabb;
+}
