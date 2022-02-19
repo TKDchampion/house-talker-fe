@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
     this.articleService.getAllNewsArticles().subscribe(
       (resp: ArticleInfo[]) => {
         this.articlesList = resp;
+        this.articlesList.sort((a, b) => (a.time > b.time ? -1 : 1));
         this.spinner.hide();
       },
       (error) => {

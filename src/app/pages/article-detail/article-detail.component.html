@@ -7,10 +7,34 @@
     <div class="tips">{{ article?.location }} • {{ article?.tips }}</div>
     <div class="subtitle">{{ article?.summaryContent }}</div>
     <div class="content" [innerHTML]="article?.content"></div>
+
+    <div class="reply">
+      <textarea
+        name=""
+        id=""
+        cols="30"
+        rows="10"
+        [(ngModel)]="inputMessage"
+      ></textarea>
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="createMessage()"
+        [disabled]="!inputMessage"
+      >
+        留言
+      </button>
+    </div>
   </div>
 
   <div class="messages">
-    <div class="speech-bubble-right">我自己的留言</div>
-    <div class="speech-bubble-left">別人的留言</div>
+    <div
+      *ngFor="let item of messages"
+      [ngClass]="
+        item.isOwnMessage ? 'speech-bubble-right' : 'speech-bubble-left'
+      "
+    >
+      {{ item.content }}
+    </div>
   </div>
 </app-box>
