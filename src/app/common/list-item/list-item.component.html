@@ -10,4 +10,8 @@
     <div>Reply: 1000</div>
     <div>{{ setting?.nickName }} • {{ setting?.time }}</div>
   </div>
+  <div *ngIf="isControlBtn" class="text-end">
+    <button type="button" class="btn btn-success">更新</button>
+    <button type="button" class="btn btn-danger">刪除</button>
+  </div>
 </div>

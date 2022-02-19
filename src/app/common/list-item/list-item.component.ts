@@ -8,6 +8,7 @@ import { ArticleInfo } from 'src/services/article.service';
 })
 export class ListItemComponent implements OnInit {
   @Input() setting?: ArticleInfo;
+  @Input() isControlBtn = false;
 
   constructor() {}
 

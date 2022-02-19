@@ -57,10 +57,10 @@ export class ArticleDetailComponent implements OnInit {
     this.messageService.getMessagesForUser(this.articleId).subscribe(
       (resp) => {
         this.messages = resp;
+        this.messages.sort((a, b) => (a.time > b.time ? -1 : 1));
         this.messages.forEach(
           (i) => (i.isOwnMessage = i.nickName === this.nickName)
         );
-        this.messages.sort((a, b) => (a.time > b.time ? -1 : 1));
         this.spinnerService.hide();
       },
       (error) => {
@@ -75,8 +75,9 @@ export class ArticleDetailComponent implements OnInit {
       articleId: this.articleId,
     };
     this.spinnerService.show();
-    this.messageService
-      .createMessage(param)
-      .subscribe(() => this.getMessageList());
+    this.messageService.createMessage(param).subscribe(() => {
+      this.inputMessage = '';
+      this.getMessageList();
+    });
   }
 }

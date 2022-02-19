@@ -30,9 +30,7 @@
   <div class="messages">
     <div
       *ngFor="let item of messages"
-      [ngClass]="
-        item.isOwnMessage ? 'speech-bubble-right' : 'speech-bubble-left'
-      "
+      ngClass="speech-bubble-{{ item.isOwnMessage ? 'right' : 'left' }}"
     >
       {{ item.content }}
     </div>
