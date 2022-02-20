@@ -39,6 +39,12 @@ export class ArticleService extends ErrorServiceService {
       body: params,
     });
   }
+
+  deleteArticle(id: string) {
+    return this.delete('deleteArticle', {
+      queryObject: { articleId: id },
+    });
+  }
 }
 
 export interface CreateArticleParams {
