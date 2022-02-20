@@ -25,10 +25,16 @@ export class MessageService extends ErrorServiceService {
     });
   }
 
-  updateMseeage(id: string, param: createMessageParam) {
+  updateMessage(id: string, param: createMessageParam) {
     return this.put('updateComment', {
       queryObject: { commentId: id },
       body: param,
+    });
+  }
+
+  deleteMessage(id: string) {
+    return this.delete('deleteComment', {
+      queryObject: { commentId: id },
     });
   }
 }

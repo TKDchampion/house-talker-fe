@@ -88,7 +88,7 @@ export class ArticleDetailComponent implements OnInit {
         content: item.content,
         articleId: this.articleId,
       };
-      this.messageService.updateMseeage(item.commentId, param).subscribe(
+      this.messageService.updateMessage(item.commentId, param).subscribe(
         () => {
           item.openState = false;
           this.getMessageList();
@@ -102,5 +102,15 @@ export class ArticleDetailComponent implements OnInit {
 
   cancelMessage(item: MessagesInfo) {
     item.openState = false;
+  }
+
+  deleteMessage(item: MessagesInfo) {
+    this.spinnerService.show();
+    this.messageService.deleteMessage(item.commentId).subscribe(
+      () => {
+        this.getMessageList();
+      },
+      () => this.spinnerService.hide
+    );
   }
 }
