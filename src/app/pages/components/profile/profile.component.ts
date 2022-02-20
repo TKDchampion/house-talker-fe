@@ -37,6 +37,7 @@ export class ProfileComponent implements OnInit {
     this.spinner.show();
     this.articleService.getArticleForUser().subscribe((resp) => {
       this.articlesList = resp;
+      this.articlesList.sort((a, b) => (a.time > b.time ? -1 : 1));
       this.profile.count = resp.length;
       this.spinner.hide();
     });

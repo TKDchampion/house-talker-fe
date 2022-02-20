@@ -32,6 +32,13 @@ export class ArticleService extends ErrorServiceService {
       body: params,
     });
   }
+
+  updateArticle(id: string, params: CreateArticleParams) {
+    return this.put('updateArticle', {
+      queryObject: { articleId: id },
+      body: params,
+    });
+  }
 }
 
 export interface CreateArticleParams {

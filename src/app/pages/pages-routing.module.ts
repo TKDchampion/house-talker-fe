@@ -21,6 +21,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'article-page/:id',
+        loadChildren: () =>
+          import('./article-edit-create/article-edit-create.module').then(
+            (m) => m.ArticleEditCreateModule
+          ),
+      },
+      {
         path: 'article-detail',
         loadChildren: () =>
           import('./article-detail/article-detail.module').then(

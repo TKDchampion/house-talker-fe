@@ -1,9 +1,10 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { StorageService } from 'src/app/core/services/storage.service';
 import {
+  ArticleDetailInfo,
   ArticleService,
   CreateArticleParams,
 } from 'src/services/article.service';
@@ -26,22 +27,45 @@ export class ArticleEditCreateComponent implements OnInit {
     tips: ['', [Validators.required]],
     content: ['', [Validators.required]],
   });
+  articleId: string;
 
   constructor(
     private fb: FormBuilder,
     private storage: StorageService,
     private articleService: ArticleService,
     private spinner: NgxSpinnerService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.articleId = this.route.snapshot.paramMap.get('id') as string;
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.articleId) {
+      this.getArticleDetail();
+    }
+  }
 
-  changeCity($event: any) {
-    const cityName = $event.target.value;
+  changeCity(event: any, type = 'create') {
+    const cityName = type === 'create' ? event.target.value : event;
     const cityDistrict = this.city.find((i) => i.name === cityName)?.districts;
     this.districts = !!cityDistrict ? cityDistrict : [];
     this.articleForm.patchValue({ districts: '' });
+  }
+
+  getArticleDetail() {
+    this.spinner.show();
+    this.articleService.getArticleDetail(this.articleId).subscribe(
+      (resp: any) => {
+        const info = resp;
+        info['cityName'] = resp.location.split(' ')[0];
+        this.changeCity(info['cityName'], 'update');
+        info['districts'] = resp.location.split(' ')[1];
+        this.articleForm.patchValue(info);
+        this.spinner.hide();
+      },
+      (error) => this.spinner.hide()
+    );
   }
 
   getEditorInstance(editorInstance: any) {
@@ -71,6 +95,8 @@ export class ArticleEditCreateComponent implements OnInit {
     }
   }
 
+  createArticle() {}
+
   onSubmit() {
     if (this.articleForm.valid) {
       this.spinner.show();
@@ -85,18 +111,37 @@ export class ArticleEditCreateComponent implements OnInit {
         tips: this.articleForm.get('tips')?.value,
       };
 
-      this.articleService.createArticle(createParam).subscribe(
-        () => {
-          this.router.navigate(['/app']);
-          this.spinner.hide();
-        },
-        () => {
-          this.spinner.hide();
-          alert('Save Fail!!!');
-        }
-      );
+      !this.articleId
+        ? this.createAtricleService(createParam)
+        : this.updateArticleService(createParam);
     } else {
       alert('Format Error!!!');
     }
+  }
+
+  private updateArticleService(updateParam: CreateArticleParams) {
+    this.articleService.updateArticle(this.articleId, updateParam).subscribe(
+      () => {
+        this.router.navigate(['/app']);
+        this.spinner.hide();
+      },
+      () => {
+        this.spinner.hide();
+        alert('Save Fail!!!');
+      }
+    );
+  }
+
+  private createAtricleService(createParam: CreateArticleParams) {
+    this.articleService.createArticle(createParam).subscribe(
+      () => {
+        this.router.navigate(['/app']);
+        this.spinner.hide();
+      },
+      () => {
+        this.spinner.hide();
+        alert('Save Fail!!!');
+      }
+    );
   }
 }
