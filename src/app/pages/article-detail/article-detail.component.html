@@ -32,7 +32,38 @@
       *ngFor="let item of messages"
       ngClass="speech-bubble-{{ item.isOwnMessage ? 'right' : 'left' }}"
     >
-      {{ item.content }}
+      <div class="message-item" *ngIf="!item.openState">
+        {{ item.content }}
+      </div>
+      <div *ngIf="item.openState">
+        <textarea
+          id=""
+          cols="30"
+          rows="10"
+          [(ngModel)]="item.content"
+        ></textarea>
+      </div>
+      <div class="text-end me-3">
+        <div *ngIf="item.isOwnMessage">
+          <button
+            type="button"
+            class="btn btn-success"
+            (click)="updataMessage(item)"
+          >
+            {{ item.openState ? "更新" : "編輯" }}
+          </button>
+          <button
+            *ngIf="item.openState"
+            type="button"
+            class="btn btn-secondary"
+            (click)="cancelMessage(item)"
+          >
+            取消
+          </button>
+          <button type="button" class="btn btn-danger">刪除</button>
+        </div>
+        <div>{{ item.nickName }} • {{ item.time }}</div>
+      </div>
     </div>
   </div>
 </app-box>

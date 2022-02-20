@@ -24,6 +24,13 @@ export class MessageService extends ErrorServiceService {
       body: param,
     });
   }
+
+  updateMseeage(id: string, param: createMessageParam) {
+    return this.put('updateComment', {
+      queryObject: { commentId: id },
+      body: param,
+    });
+  }
 }
 
 export interface createMessageParam {
@@ -39,4 +46,5 @@ export interface MessagesInfo {
   nickName: string;
   articleId: string;
   isOwnMessage?: boolean;
+  [key: string]: unknown;
 }

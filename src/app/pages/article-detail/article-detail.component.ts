@@ -21,7 +21,7 @@ export class ArticleDetailComponent implements OnInit {
   article?: ArticleDetailInfo;
   messages?: MessagesInfo[];
   inputMessage = '';
-  nickName?: any;
+  userId?: any;
   articleId = '';
 
   constructor(
@@ -37,7 +37,7 @@ export class ArticleDetailComponent implements OnInit {
     if (this.articleId) {
       this.getArticleDetail();
     }
-    this.nickName = this.storage && this.storage.get('nickName');
+    this.userId = this.storage && this.storage.get('userId');
   }
 
   getArticleDetail() {
@@ -59,7 +59,7 @@ export class ArticleDetailComponent implements OnInit {
         this.messages = resp;
         this.messages.sort((a, b) => (a.time > b.time ? -1 : 1));
         this.messages.forEach(
-          (i) => (i.isOwnMessage = i.nickName === this.nickName)
+          (i) => (i.isOwnMessage = i.userId === this.userId)
         );
         this.spinnerService.hide();
       },
@@ -79,5 +79,28 @@ export class ArticleDetailComponent implements OnInit {
       this.inputMessage = '';
       this.getMessageList();
     });
+  }
+
+  updataMessage(item: MessagesInfo) {
+    if (item.openState) {
+      this.spinnerService.show();
+      const param: createMessageParam = {
+        content: item.content,
+        articleId: this.articleId,
+      };
+      this.messageService.updateMseeage(item.commentId, param).subscribe(
+        () => {
+          item.openState = false;
+          this.getMessageList();
+        },
+        () => this.spinnerService.hide()
+      );
+    } else {
+      item.openState = true;
+    }
+  }
+
+  cancelMessage(item: MessagesInfo) {
+    item.openState = false;
   }
 }
