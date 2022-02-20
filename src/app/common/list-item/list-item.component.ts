@@ -34,6 +34,9 @@ export class ListItemComponent implements OnInit {
       this.spinnerService.show();
       this.articleService.deleteArticle(articleId).subscribe(
         () => {
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          this.router.onSameUrlNavigation = 'reload';
+          this.router.navigate([`/app`]);
           this.modalService.hide();
           this.spinnerService.hide();
         },
