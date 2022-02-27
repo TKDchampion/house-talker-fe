@@ -33,8 +33,4 @@ export class HomeComponent implements OnInit {
       }
     );
   }
-
-  goDetailArticle(item: ArticleInfo) {
-    this.router.navigate([`/app/article-detail/${item.articleId}`]);
-  }
 }

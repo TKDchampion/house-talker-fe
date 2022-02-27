@@ -10,6 +10,7 @@ import {
   SingParam,
 } from 'src/services/auth.service';
 import { StorageService } from '../core/services/storage.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-pages',
@@ -45,6 +46,7 @@ export class PagesComponent implements OnInit {
   ngOnInit(): void {}
 
   openModal(template: TemplateRef<any>) {
+    this.errorMessage = '';
     this.modalRef = this.modalService.show(template);
   }
 
@@ -73,9 +75,12 @@ export class PagesComponent implements OnInit {
         this.spinner.hide();
         this.modalRef?.hide();
       },
-      () => {
+      (error: HttpErrorResponse) => {
+        console.log(error);
+
         this.spinner.hide();
-        this.errorMessage = '系統忙線';
+        this.errorMessage =
+          error.status === 403 ? error.error.message : '系統忙線';
       }
     );
   }
@@ -88,7 +93,7 @@ export class PagesComponent implements OnInit {
         this.spinner.hide();
         this.modalRef?.hide();
       },
-      (error) => {
+      () => {
         this.spinner.hide();
         this.isLogin = false;
         this.errorMessage = '帳密錯誤';

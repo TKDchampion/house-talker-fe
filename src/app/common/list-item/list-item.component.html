@@ -1,4 +1,4 @@
-<div class="list-item-box">
+<div class="list-item-box" (click)="goUpdateOrDetail('article-detail')">
   <div class="list-item-box-label">
     {{ setting?.location }} • {{ setting?.tips }}
   </div>
@@ -7,14 +7,14 @@
     {{ setting?.summaryContent }}
   </div>
   <div class="list-item-box-footer d-flex justify-content-between">
-    <div>Reply: 1000</div>
+    <div>Reply: {{ setting?.countsComment }}</div>
     <div>{{ setting?.nickName }} • {{ setting?.time }}</div>
   </div>
   <div *ngIf="isControlBtn" class="text-end">
     <button
       type="button"
       class="btn btn-success"
-      (click)="updateGo(setting?.articleId)"
+      (click)="goUpdateOrDetail('article-page')"
     >
       更新
     </button>

@@ -22,10 +22,10 @@ export class ListItemComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  updateGo(articleId?: string) {
+  goUpdateOrDetail(pathName: 'article-page' | 'article-detail') {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate([`/app/article-page/${articleId}`]);
+    this.router.navigate([`/app/${pathName}/${this.setting?.articleId}`]);
     this.modalService.hide();
   }
 

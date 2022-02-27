@@ -38,6 +38,7 @@ export class ErrorServiceService extends BaseService {
   private handlerAuthError(): OperatorFunction<unknown, unknown> {
     return catchError((e: HttpErrorResponse, caught) => {
       if (e.status === 401) {
+        location.reload();
         this.router.navigate(['/app']);
         return of();
       }
