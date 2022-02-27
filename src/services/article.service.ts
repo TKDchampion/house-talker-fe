@@ -66,6 +66,7 @@ export interface ArticleInfo {
   tips: string;
   title: string;
   countsComment: number;
+  [key: string]: any;
 }
 
 export interface ArticleDetailInfo {

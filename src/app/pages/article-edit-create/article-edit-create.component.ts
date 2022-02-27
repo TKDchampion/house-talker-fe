@@ -8,7 +8,7 @@ import {
   ArticleService,
   CreateArticleParams,
 } from 'src/services/article.service';
-import { cityData, District, quillSetting } from './article-edit.model';
+import { cityData, DistrictModel, quillSetting } from './article-edit.model';
 @Component({
   selector: 'app-article-edit-create',
   templateUrl: './article-edit-create.component.html',
@@ -18,7 +18,7 @@ export class ArticleEditCreateComponent implements OnInit {
   quill: any;
   modules = quillSetting;
   city = cityData;
-  districts: District[] = [];
+  districts: DistrictModel[] = [];
   articleForm = this.fb.group({
     title: ['', [Validators.required]],
     summaryContnet: ['', [Validators.required]],

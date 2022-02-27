@@ -9,28 +9,42 @@
               type="button"
               class="btn btn-primary dropdown-toggle"
             >
-              Button dropdown <span class="caret"></span>
+              {{ selectedCity }} <span class="caret"></span>
             </button>
             <ul *dropdownMenu class="dropdown-menu">
-              <li>
-                <a class="dropdown-item" href="#">Action</a>
+              <li *ngFor="let item of city">
+                <a class="dropdown-item" (click)="selectedCityFtn(item)">{{
+                  item.name
+                }}</a>
               </li>
-              <li>
-                <a class="dropdown-item" href="#">Another action</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </li>
-              <li class="divider dropdown-divider"></li>
-              <li>
-                <a class="dropdown-item" href="#">Separated link</a>
+            </ul>
+          </div>
+          <div class="btn-group" dropdown>
+            <button
+              dropdownToggle
+              type="button"
+              class="btn btn-primary dropdown-toggle"
+            >
+              {{ selectDistrict }} <span class="caret"></span>
+            </button>
+            <ul *dropdownMenu class="dropdown-menu">
+              <li *ngFor="let item of districts">
+                <a class="dropdown-item" (click)="selectedDistrictFtn(item)">{{
+                  item.name
+                }}</a>
               </li>
             </ul>
           </div>
           <div>
-            <input class="input-search" type="text" />
+            <input class="input-search" type="text" [(ngModel)]="filterText" />
           </div>
-          <button type="button" class="btn btn-primary w-100">Search</button>
+          <button
+            type="button"
+            class="btn btn-primary w-100"
+            (click)="filterFtn()"
+          >
+            Search
+          </button>
         </app-box>
       </div>
       <div class="col-12">

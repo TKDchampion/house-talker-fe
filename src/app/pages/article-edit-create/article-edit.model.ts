@@ -1617,9 +1617,14 @@ export const cityData = [
   },
 ];
 
-export interface District {
+export interface DistrictModel {
   zip: string;
   name: string;
+}
+
+export interface CityModel {
+  name: string;
+  districts: DistrictModel[];
 }
 
 export const quillSetting = {
