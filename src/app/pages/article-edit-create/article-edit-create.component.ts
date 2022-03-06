@@ -4,7 +4,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { StorageService } from 'src/app/core/services/storage.service';
 import {
-  ArticleDetailInfo,
   ArticleService,
   CreateArticleParams,
 } from 'src/services/article.service';
@@ -26,6 +25,7 @@ export class ArticleEditCreateComponent implements OnInit {
     districts: ['', [Validators.required]],
     tips: ['', [Validators.required]],
     content: ['', [Validators.required]],
+    isHiddenName: [false, [Validators.required]],
   });
   articleId: string;
 
@@ -109,6 +109,7 @@ export class ArticleEditCreateComponent implements OnInit {
         nickName: this.storage.get('nickName') as any,
         summaryContnet: this.articleForm.get('summaryContnet')?.value,
         tips: this.articleForm.get('tips')?.value,
+        isHiddenName: this.articleForm.get('isHiddenName')?.value,
       };
 
       !this.articleId

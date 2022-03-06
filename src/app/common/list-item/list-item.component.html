@@ -1,4 +1,7 @@
-<div class="list-item-box" (click)="goUpdateOrDetail('article-detail')">
+<div
+  class="list-item-box"
+  (click)="isControlBtn ? '' : goUpdateOrDetail('article-detail')"
+>
   <div class="list-item-box-label">
     {{ setting?.location }} • {{ setting?.tips }}
   </div>

@@ -54,6 +54,7 @@ export interface CreateArticleParams {
   summaryContnet: string;
   tips: string;
   title: string;
+  isHiddenName: boolean;
 }
 
 export interface ArticleInfo {
