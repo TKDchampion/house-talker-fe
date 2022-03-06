@@ -1,3 +1,4 @@
+import { ActivateComponent } from './activate/activate.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -8,6 +9,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/pages.module').then((m) => m.PagesModule),
   },
+  { path: 'activate', component: ActivateComponent },
 ];
 
 @NgModule({

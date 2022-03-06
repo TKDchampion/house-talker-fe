@@ -1,3 +1,4 @@
+import { ActivateComponent } from './activate/activate.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -19,7 +20,7 @@ export class DKSHJWTOptions extends JWTOptions {
   key = 'access_token';
 }
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ActivateComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,

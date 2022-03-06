@@ -26,6 +26,12 @@ export class AuthService extends ErrorServiceService {
   sign(param: SingParam) {
     return this.post('signUp', { body: param });
   }
+
+  activate(token: string) {
+    return this.post('activate', {
+      queryObject: { token: token },
+    });
+  }
 }
 
 export interface SingParam {
