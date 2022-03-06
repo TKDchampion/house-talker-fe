@@ -73,12 +73,12 @@ export class PagesComponent implements OnInit {
       () => {
         console.log('Success!!');
         this.spinner.hide();
-        this.modalRef?.hide();
         this.signForm.patchValue({
           account: '',
           password: '',
           nickName: '',
         });
+        this.errorMessage = '註冊成功，請到信箱啟用連結。';
       },
       (error: HttpErrorResponse) => {
         console.log(error);
