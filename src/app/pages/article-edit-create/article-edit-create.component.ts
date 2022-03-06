@@ -20,7 +20,10 @@ export class ArticleEditCreateComponent implements OnInit {
   districts: DistrictModel[] = [];
   articleForm = this.fb.group({
     title: ['', [Validators.required]],
-    summaryContnet: ['', [Validators.required]],
+    summaryContnet: [
+      '',
+      [Validators.required, Validators.pattern('\bw{12,20}\b')],
+    ],
     cityName: ['', [Validators.required]],
     districts: ['', [Validators.required]],
     tips: ['', [Validators.required]],
@@ -115,8 +118,6 @@ export class ArticleEditCreateComponent implements OnInit {
       !this.articleId
         ? this.createAtricleService(createParam)
         : this.updateArticleService(createParam);
-    } else {
-      alert('Format Error!!!');
     }
   }
 

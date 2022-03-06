@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseApiUrl: 'https://dksh-parent-web-dev.cloud-interactive.com/',
+  baseApiUrl: 'https://us-central1-talker-9f1f9.cloudfunctions.net/webApi/',
 };

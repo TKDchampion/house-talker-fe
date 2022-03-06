@@ -2,7 +2,12 @@
   <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
     <div class="mb-3">
       <label class="form-label">標題</label>
-      <input type="text" class="form-control" formControlName="title" />
+      <input
+        type="text"
+        class="form-control"
+        formControlName="title"
+        [ngClass]="{ error: !!articleForm.get('title')?.errors }"
+      />
     </div>
     <div class="mb-3">
       <label class="form-label">摘要</label>
@@ -10,8 +15,9 @@
         type="text"
         class="form-control"
         formControlName="summaryContnet"
+        [ngClass]="{ error: !!articleForm.get('summaryContnet')?.errors }"
       />
-      <div class="form-text">摘要必須至少15個字。</div>
+      <div class="form-text">摘要必須至少12個字，但不能超過20個字。</div>
     </div>
     <div class="mb-3">
       <label class="form-label">地理位置</label>
@@ -19,6 +25,7 @@
         <select
           class="form-select"
           formControlName="cityName"
+          [ngClass]="{ error: !!articleForm.get('cityName')?.errors }"
           (change)="changeCity($event)"
         >
           <option value="" [disabled]="true">城市</option>
@@ -26,7 +33,11 @@
             {{ item.name }}
           </option>
         </select>
-        <select class="form-select" formControlName="districts">
+        <select
+          class="form-select"
+          formControlName="districts"
+          [ngClass]="{ error: !!articleForm.get('districts')?.errors }"
+        >
           <option value="" [disabled]="true">地區</option>
           <option
             *ngFor="let districtItem of districts"
@@ -39,7 +50,12 @@
     </div>
     <div class="mb-3">
       <label class="form-label">提示</label>
-      <input type="text" class="form-control" formControlName="tips" />
+      <input
+        type="text"
+        class="form-control"
+        formControlName="tips"
+        [ngClass]="{ error: !!articleForm.get('tips')?.errors }"
+      />
       <div class="form-text">
         可輸入一些關鍵字來暗示，例如可以輸入學校、仲介、Ｘ先生或更詳細地址等...。
       </div>
@@ -49,6 +65,7 @@
       <quill-editor
         [modules]="modules"
         formControlName="content"
+        [ngClass]="{ errorContent: !!articleForm.get('content')?.errors }"
         (onEditorCreated)="getEditorInstance($event)"
       ></quill-editor>
       <div class="form-text">
