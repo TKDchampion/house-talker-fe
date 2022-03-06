@@ -4,19 +4,13 @@ import { Injectable } from '@angular/core';
 import { HttpDefaultOptions } from 'src/app/core/model/option';
 import { Router } from '@angular/router';
 import { ErrorServiceService } from 'src/app/core/services/error-service.service';
-import { StorageService } from 'src/app/core/services/storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService extends ErrorServiceService {
-  constructor(
-    http: HttpClient,
-    options: HttpDefaultOptions,
-    router: Router,
-    storageService: StorageService
-  ) {
-    super(http, options, router, storageService);
+  constructor(http: HttpClient, options: HttpDefaultOptions, router: Router) {
+    super(http, options, router);
   }
 
   login(param: LoginParam): Observable<LoginInfo> {

@@ -6,7 +6,6 @@ import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { BaseService } from './base.service';
 import { HttpDefaultOptions, HttpRequestOptions } from '../model/option';
-import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +14,7 @@ export class ErrorServiceService extends BaseService {
   constructor(
     http: HttpClient,
     options: HttpDefaultOptions,
-    private router: Router,
-    private storageService: StorageService
+    private router: Router
   ) {
     super(http, options);
   }
@@ -42,7 +40,7 @@ export class ErrorServiceService extends BaseService {
       if (e.status === 401) {
         // location.reload();
         this.router.navigate(['/app/home']);
-        this.storageService.clear();
+        localStorage.clear();
         return of();
       }
       throw e;

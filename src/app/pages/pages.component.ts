@@ -74,6 +74,11 @@ export class PagesComponent implements OnInit {
         console.log('Success!!');
         this.spinner.hide();
         this.modalRef?.hide();
+        this.signForm.patchValue({
+          account: '',
+          password: '',
+          nickName: '',
+        });
       },
       (error: HttpErrorResponse) => {
         console.log(error);
@@ -81,6 +86,11 @@ export class PagesComponent implements OnInit {
         this.spinner.hide();
         this.errorMessage =
           error.status === 403 ? error.error.message : '系統忙線';
+        this.signForm.patchValue({
+          account: '',
+          password: '',
+          nickName: '',
+        });
       }
     );
   }
@@ -92,11 +102,19 @@ export class PagesComponent implements OnInit {
         this.setPersonal(resp);
         this.spinner.hide();
         this.modalRef?.hide();
+        this.loginForm.patchValue({
+          account: '',
+          password: '',
+        });
       },
       () => {
         this.spinner.hide();
         this.isLogin = false;
         this.errorMessage = '帳密錯誤';
+        this.loginForm.patchValue({
+          account: '',
+          password: '',
+        });
       }
     );
   }

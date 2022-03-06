@@ -1,3 +1,4 @@
+import { ActivateComponent } from './activate/activate.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PagesComponent } from './pages.component';
@@ -40,6 +41,10 @@ const routes: Routes = [
           import('./article-detail/article-detail.module').then(
             (m) => m.ArticleDetailModule
           ),
+      },
+      {
+        path: 'activate',
+        component: ActivateComponent,
       },
     ],
   },

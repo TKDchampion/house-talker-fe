@@ -1,0 +1,9 @@
+<div class="activate-body">
+  <h1 class="text-center">{{ message.title }}</h1>
+  <div class="text-center">
+    <div *ngIf="message.isSuccess; else templateName">
+      <a routerLink="/app/home" routerLinkActive="active">{{ message.text }}</a>
+    </div>
+    <ng-template #templateName> {{ message.text }}</ng-template>
+  </div>
+</div>

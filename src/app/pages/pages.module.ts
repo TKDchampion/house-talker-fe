@@ -7,9 +7,10 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ActivateComponent } from './activate/activate.component';
 
 @NgModule({
-  declarations: [PagesComponent, ProfileComponent],
+  declarations: [PagesComponent, ProfileComponent, ActivateComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,
