@@ -11,6 +11,7 @@ import {
   MessagesInfo,
 } from 'src/services/message.service';
 import { StorageService } from 'src/app/core/services/storage.service';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-article-detail',
@@ -29,7 +30,9 @@ export class ArticleDetailComponent implements OnInit {
     private articleService: ArticleService,
     private messageService: MessageService,
     private spinnerService: NgxSpinnerService,
-    private storage: StorageService
+    private storage: StorageService,
+    private tagService: Meta,
+    private titleService: Title
   ) {}
 
   ngOnInit(): void {
@@ -40,11 +43,33 @@ export class ArticleDetailComponent implements OnInit {
     this.userId = this.storage && this.storage.get('userId');
   }
 
+  addSEO(data: ArticleDetailInfo) {
+    this.titleService.setTitle(data.title);
+    this.tagService.addTag({
+      name: 'description',
+      content: data.summaryContent,
+    });
+    this.tagService.addTag({
+      property: 'og:description',
+      content: data.summaryContent,
+    });
+    this.tagService.addTag({
+      property: 'og:title',
+      content: data.title,
+    });
+    this.tagService.addTag({
+      property: 'og:image',
+      content:
+        'https://www.maxpixel.net/static/photo/1x/House-Illustration-Exterior-Two-Floors-House-House-4921836.jpg',
+    });
+  }
+
   getArticleDetail() {
     this.spinnerService.show();
     this.articleService.getArticleDetail(this.articleId).subscribe(
       (resp) => {
         this.article = resp;
+        this.addSEO(resp);
         this.getMessageList();
       },
       (error) => {

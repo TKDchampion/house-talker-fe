@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Meta } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -7,11 +7,30 @@ import { Meta } from '@angular/platform-browser';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'house-talker-fe';
-  constructor(private meta: Meta) {
-    this.meta.addTag({
+  constructor(private tagService: Meta, private titleService: Title) {
+    this.addSEO();
+  }
+
+  addSEO() {
+    this.titleService.setTitle('House Talker');
+    this.tagService.addTag({
       name: 'description',
-      content: 'This is an article about Angular Meta service',
+      content:
+        '這是一個專門收集雷房東的平台，避免以後租到的人踩雷，使社會變得佳和諧。',
+    });
+    this.tagService.addTag({
+      property: 'og:description',
+      content:
+        '這是一個專門收集雷房東的平台，避免以後租到的人踩雷，使社會變得佳和諧。',
+    });
+    this.tagService.addTag({
+      property: 'og:title',
+      content: 'House Talker',
+    });
+    this.tagService.addTag({
+      property: 'og:image',
+      content:
+        'https://www.maxpixel.net/static/photo/1x/House-Illustration-Exterior-Two-Floors-House-House-4921836.jpg',
     });
   }
 }
