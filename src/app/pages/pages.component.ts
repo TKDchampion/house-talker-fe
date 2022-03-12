@@ -31,6 +31,7 @@ export class PagesComponent implements OnInit {
     nickName: ['', Validators.required],
   });
   isLogin = false;
+  accountName = 'account';
 
   constructor(
     private modalService: BsModalService,
@@ -41,6 +42,7 @@ export class PagesComponent implements OnInit {
     private router: Router
   ) {
     this.isLogin = this.storage && this.storage.hasItem('access_token');
+    this.isLogin && (this.accountName = this.storage.get('nickName') as any);
   }
 
   ngOnInit(): void {}
@@ -125,5 +127,6 @@ export class PagesComponent implements OnInit {
     this.storage.set('nickName', info.nickName);
     this.storage.set('userId', info.userId);
     this.isLogin = true;
+    this.accountName = info.nickName;
   }
 }

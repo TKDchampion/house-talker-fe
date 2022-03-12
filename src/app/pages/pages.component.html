@@ -3,19 +3,19 @@
     <div class="d-flex justify-content-between">
       <div class="logo" routerLink="/app">Talker</div>
       <div class="d-flex header-menu">
-        <div class="header-menu-item" routerLink="/app">Home</div>
+        <div class="header-menu-item" routerLink="/app">首頁</div>
         <div class="d-flex" *ngIf="isLogin">
           <div class="header-menu-item" (click)="openModal(template3)">
-            Account
+            {{ accountName }}
           </div>
-          <div class="header-menu-item" (click)="logout()">Logout</div>
+          <div class="header-menu-item" (click)="logout()">登出</div>
         </div>
         <div class="d-flex" *ngIf="!isLogin">
           <div class="header-menu-item" (click)="openModal(template1)">
-            Login
+            登入
           </div>
           <div class="header-menu-item" (click)="openModal(template2)">
-            Sign
+            註冊
           </div>
         </div>
       </div>
@@ -29,7 +29,7 @@
 </div>
 
 <ng-template #template1>
-  <app-modal title="Login">
+  <app-modal title="登入">
     <form
       class="center"
       [formGroup]="loginForm"
@@ -37,14 +37,14 @@
     >
       <div class="inputbox">
         <input type="email" name="email" formControlName="account" />
-        <span>Email</span>
+        <span>信箱</span>
       </div>
       <div class="inputbox">
         <input type="text" name="password" formControlName="password" />
-        <span>Password</span>
+        <span>密碼</span>
       </div>
       <div class="inputbox center-margin">
-        <button class="w-100" type="submit">submit</button>
+        <button class="w-100" type="submit">送出</button>
         <div *ngIf="!!errorMessage" class="error-message">
           {{ errorMessage }}
         </div>
@@ -54,7 +54,7 @@
 </ng-template>
 
 <ng-template #template2>
-  <app-modal title="Sigin">
+  <app-modal title="註冊">
     <form
       class="center"
       [formGroup]="signForm"
@@ -62,18 +62,18 @@
     >
       <div class="inputbox">
         <input type="email" name="email" formControlName="account" />
-        <span>Email</span>
+        <span>信箱</span>
       </div>
       <div class="inputbox">
         <input type="text" name="password" formControlName="password" />
-        <span>Password</span>
+        <span>密碼</span>
       </div>
       <div class="inputbox">
         <input type="text" name="nickName" formControlName="nickName" />
-        <span>Nick name</span>
+        <span>暱稱</span>
       </div>
       <div class="inputbox center-margin">
-        <button class="w-100" type="submit">submit</button>
+        <button class="w-100" type="submit">送出</button>
         <div *ngIf="!!errorMessage" class="error-message">
           {{ errorMessage }}
         </div>
@@ -83,7 +83,7 @@
 </ng-template>
 
 <ng-template #template3>
-  <app-modal title="Profile">
+  <app-modal title="個人資料">
     <app-profile [modalRef]="modalRef"></app-profile>
   </app-modal>
 </ng-template>

@@ -1,21 +1,21 @@
 <div class="profile-box">
   <div class="profile-box-messages">
     <div class="profile-box-messages-item">
-      <span>Email : {{ profile?.email }}</span>
+      <span>信箱 : {{ profile?.email }}</span>
     </div>
     <div class="profile-box-messages-item">
-      <span>Nick name : {{ profile?.nickName }}</span>
+      <span>暱稱 : {{ profile?.nickName }}</span>
     </div>
     <div
       class="profile-box-messages-item d-flex justify-content-between flex-wrap"
     >
-      <span>Total articles : {{ profile?.count }}</span>
+      <span>總文章數 : {{ profile?.count }}</span>
       <button
         type="button"
         class="btn btn-info btn-sm"
         (click)="createArticle()"
       >
-        Create Article
+        新增文章
       </button>
     </div>
     <div></div>

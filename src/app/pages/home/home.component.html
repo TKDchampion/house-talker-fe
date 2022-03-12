@@ -36,14 +36,19 @@
             </ul>
           </div>
           <div>
-            <input class="input-search" type="text" [(ngModel)]="filterText" />
+            <input
+              class="input-search"
+              type="text"
+              [(ngModel)]="filterText"
+              placeholder="可用暱稱、文章提示、文章標題來搜尋"
+            />
           </div>
           <button
             type="button"
             class="btn btn-primary w-100"
             (click)="filterFtn()"
           >
-            Search
+            搜尋
           </button>
         </app-box>
       </div>
