@@ -24,23 +24,27 @@ export class ProfileComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private storage: StorageService,
     private router: Router
-  ) {
-    this.getArticleList();
-  }
+  ) {}
 
   ngOnInit(): void {
     this.profile.nickName = this.storage.get('nickName') as any;
     this.profile.email = this.storage.get('account') as any;
+    this.getArticleList();
   }
 
   getArticleList() {
     this.spinner.show();
-    this.articleService.getArticleForUser().subscribe((resp) => {
-      this.articlesList = resp;
-      this.articlesList.sort((a, b) => (a.time > b.time ? -1 : 1));
-      this.profile.count = resp.length;
-      this.spinner.hide();
-    });
+    this.articleService.getArticleForUser().subscribe(
+      (resp) => {
+        this.articlesList = resp;
+        this.articlesList.sort((a, b) => (a.time > b.time ? -1 : 1));
+        this.profile.count = resp.length;
+        this.spinner.hide();
+      },
+      (error) => {
+        this.spinner.hide();
+      }
+    );
   }
 
   createArticle() {

@@ -19,10 +19,10 @@ export class ArticleEditCreateComponent implements OnInit {
   city = cityData;
   districts: DistrictModel[] = [];
   articleForm = this.fb.group({
-    title: ['', [Validators.required]],
+    title: ['', [Validators.required, Validators.pattern('^.{0,12}$')]],
     summaryContnet: [
       '',
-      [Validators.required, Validators.pattern('\bw{12,20}\b')],
+      [Validators.required, Validators.pattern('^.{12,30}$')],
     ],
     cityName: ['', [Validators.required]],
     districts: ['', [Validators.required]],

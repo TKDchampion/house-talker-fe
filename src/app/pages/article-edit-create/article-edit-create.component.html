@@ -8,6 +8,7 @@
         formControlName="title"
         [ngClass]="{ error: !!articleForm.get('title')?.errors }"
       />
+      <div class="form-text">標題不能超過12個字。</div>
     </div>
     <div class="mb-3">
       <label class="form-label">摘要</label>
@@ -17,7 +18,7 @@
         formControlName="summaryContnet"
         [ngClass]="{ error: !!articleForm.get('summaryContnet')?.errors }"
       />
-      <div class="form-text">摘要必須至少12個字，但不能超過20個字。</div>
+      <div class="form-text">摘要必須至少12個字，但不能超過30個字。</div>
     </div>
     <div class="mb-3">
       <label class="form-label">地理位置</label>
