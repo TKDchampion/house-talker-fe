@@ -16,12 +16,12 @@ export class AppComponent {
     this.tagService.addTag({
       name: 'description',
       content:
-        '這是一個專門收集雷房東的平台，避免以後租到的人踩雷，使社會變得佳和諧。',
+        '這是一個專門收集黑心房東及地雷飯店名宿的平台，避免以後租到的人踩雷，使社會變得佳和諧。',
     });
     this.tagService.addTag({
       property: 'og:description',
       content:
-        '這是一個專門收集雷房東的平台，避免以後租到的人踩雷，使社會變得佳和諧。',
+        '這是一個專門收集黑心房東及地雷飯店名宿的平台，避免以後租到的人踩雷，使社會變得佳和諧。',
     });
     this.tagService.addTag({
       property: 'og:title',

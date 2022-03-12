@@ -6,8 +6,8 @@
       </button>
     </h2>
     <div class="accordion-collapse collapse" [ngClass]="{ show: item.show }">
-      <div class="accordion-body">
-        {{ item.content }}
+      <div class="accordion-body" [innerHTML]="item.content">
+        <!-- {{ item.content }} -->
       </div>
     </div>
   </div>
