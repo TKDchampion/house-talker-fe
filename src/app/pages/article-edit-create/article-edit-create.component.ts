@@ -20,7 +20,7 @@ export class ArticleEditCreateComponent implements OnInit {
   districts: DistrictModel[] = [];
   articleForm = this.fb.group({
     title: ['', [Validators.required, Validators.pattern('^.{0,12}$')]],
-    summaryContnet: [
+    summaryContent: [
       '',
       [Validators.required, Validators.pattern('^.{12,30}$')],
     ],
@@ -110,7 +110,7 @@ export class ArticleEditCreateComponent implements OnInit {
           this.articleForm.get('districts')?.value
         }`,
         nickName: this.storage.get('nickName') as any,
-        summaryContnet: this.articleForm.get('summaryContnet')?.value,
+        summaryContent: this.articleForm.get('summaryContent')?.value,
         tips: this.articleForm.get('tips')?.value,
         isHiddenName: this.articleForm.get('isHiddenName')?.value,
       };

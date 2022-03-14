@@ -51,7 +51,7 @@ export interface CreateArticleParams {
   content: string;
   location: string;
   nickName: string;
-  summaryContnet: string;
+  summaryContent: string;
   tips: string;
   title: string;
   isHiddenName: boolean;
