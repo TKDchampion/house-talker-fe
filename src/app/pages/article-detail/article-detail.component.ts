@@ -45,22 +45,17 @@ export class ArticleDetailComponent implements OnInit {
 
   addSEO(data: ArticleDetailInfo) {
     this.titleService.setTitle(data.title);
-    this.tagService.addTag({
+    this.tagService.updateTag({
       name: 'description',
       content: data.summaryContent,
     });
-    this.tagService.addTag({
+    this.tagService.updateTag({
       property: 'og:description',
       content: data.summaryContent,
     });
-    this.tagService.addTag({
+    this.tagService.updateTag({
       property: 'og:title',
       content: data.title,
-    });
-    this.tagService.addTag({
-      property: 'og:image',
-      content:
-        'https://www.maxpixel.net/static/photo/1x/House-Illustration-Exterior-Two-Floors-House-House-4921836.jpg',
     });
   }
 
