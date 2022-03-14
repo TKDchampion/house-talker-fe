@@ -12,6 +12,8 @@ import {
 } from 'src/services/message.service';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { Meta, Title } from '@angular/platform-browser';
+import { CanonicalService } from 'src/app/core/services/canonical.service';
+import { SettingTags } from 'src/app/common/seo/setting-tags';
 
 @Component({
   selector: 'app-article-detail',
@@ -32,7 +34,8 @@ export class ArticleDetailComponent implements OnInit {
     private spinnerService: NgxSpinnerService,
     private storage: StorageService,
     private tagService: Meta,
-    private titleService: Title
+    private titleService: Title,
+    private canonicalService: CanonicalService
   ) {}
 
   ngOnInit(): void {
@@ -43,28 +46,20 @@ export class ArticleDetailComponent implements OnInit {
     this.userId = this.storage && this.storage.get('userId');
   }
 
-  addSEO(data: ArticleDetailInfo) {
-    this.titleService.setTitle(data.title);
-    this.tagService.updateTag({
-      name: 'description',
-      content: data.summaryContent,
-    });
-    this.tagService.updateTag({
-      property: 'og:description',
-      content: data.summaryContent,
-    });
-    this.tagService.updateTag({
-      property: 'og:title',
-      content: data.title,
-    });
-  }
-
   getArticleDetail() {
     this.spinnerService.show();
     this.articleService.getArticleDetail(this.articleId).subscribe(
       (resp) => {
         this.article = resp;
-        this.addSEO(resp);
+        const settongSEO = new SettingTags(
+          this.tagService,
+          this.titleService,
+          this.canonicalService
+        );
+        settongSEO.addSEO({
+          title: resp.title,
+          description: resp.summaryContent,
+        });
         this.getMessageList();
       },
       (error) => {

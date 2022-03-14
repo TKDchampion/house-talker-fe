@@ -8,6 +8,7 @@ import {
   CreateArticleParams,
 } from 'src/services/article.service';
 import { cityData, DistrictModel, quillSetting } from './article-edit.model';
+import { CanonicalService } from 'src/app/core/services/canonical.service';
 @Component({
   selector: 'app-article-edit-create',
   templateUrl: './article-edit-create.component.html',
@@ -38,12 +39,14 @@ export class ArticleEditCreateComponent implements OnInit {
     private articleService: ArticleService,
     private spinner: NgxSpinnerService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private canonicalService: CanonicalService
   ) {
     this.articleId = this.route.snapshot.paramMap.get('id') as string;
   }
 
   ngOnInit(): void {
+    this.canonicalService.setCanonicalURL();
     if (this.articleId) {
       this.getArticleDetail();
     }

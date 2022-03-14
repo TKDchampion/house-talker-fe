@@ -6,6 +6,7 @@ import {
   CityModel,
   DistrictModel,
 } from '../article-edit-create/article-edit.model';
+import { CanonicalService } from 'src/app/core/services/canonical.service';
 
 @Component({
   selector: 'app-home',
@@ -23,12 +24,15 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private articleService: ArticleService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private canonicalService: CanonicalService
   ) {
     this.getArticlesList();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.canonicalService.setCanonicalURL();
+  }
 
   selectedCityFtn(item: CityModel) {
     this.selectedCity = item.name;
