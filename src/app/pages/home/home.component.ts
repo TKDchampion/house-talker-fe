@@ -7,6 +7,8 @@ import {
   DistrictModel,
 } from '../article-edit-create/article-edit.model';
 import { CanonicalService } from 'src/app/core/services/canonical.service';
+import { SettingTags } from 'src/app/common/seo/setting-tags';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -25,13 +27,25 @@ export class HomeComponent implements OnInit {
   constructor(
     private articleService: ArticleService,
     private spinner: NgxSpinnerService,
-    private canonicalService: CanonicalService
+    private canonicalService: CanonicalService,
+    private tagService: Meta,
+    private titleService: Title
   ) {
     this.getArticlesList();
   }
 
   ngOnInit(): void {
     this.canonicalService.setCanonicalURL();
+    const settongSEO = new SettingTags(
+      this.tagService,
+      this.titleService,
+      this.canonicalService
+    );
+    settongSEO.addSEO({
+      title: 'HouseTalker',
+      description:
+        '這是一個專門收集黑心房東或壞房東及地雷飯店名宿的平台，避免以後租到的人踩雷，使社會變得佳和諧。',
+    });
   }
 
   selectedCityFtn(item: CityModel) {

@@ -14,11 +14,11 @@ export class AppComponent implements OnInit {
   }
 
   addSEO() {
-    this.titleService.setTitle('House Talker');
+    this.titleService.setTitle('HouseTalker');
     this.tagService.addTags([
       {
         name: 'application-name',
-        content: 'House Talker',
+        content: 'HouseTalker',
       },
       {
         name: 'keywords',
@@ -31,14 +31,14 @@ export class AppComponent implements OnInit {
       },
       {
         property: 'og:site_name',
-        content: 'House Talker',
+        content: 'HouseTalker',
       },
       {
         name: 'og:description',
         content:
           '這是一個專門收集黑心房東或壞房東及地雷飯店名宿的平台，避免以後租到的人踩雷，使社會變得佳和諧。',
       },
-      { name: 'og:title', content: 'House Talker' },
+      { name: 'og:title', content: 'HouseTalker' },
       {
         property: 'og:image',
         content:
