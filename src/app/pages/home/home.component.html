@@ -3,37 +3,48 @@
     <div class="row">
       <div class="col-12">
         <app-box>
-          <div class="btn-group" dropdown>
-            <button
-              dropdownToggle
-              type="button"
-              class="btn btn-primary dropdown-toggle"
-            >
-              {{ selectedCity }} <span class="caret"></span>
-            </button>
-            <ul *dropdownMenu class="dropdown-menu">
-              <li *ngFor="let item of city">
-                <a class="dropdown-item" (click)="selectedCityFtn(item)">{{
-                  item.name
-                }}</a>
-              </li>
-            </ul>
-          </div>
-          <div class="btn-group" dropdown>
-            <button
-              dropdownToggle
-              type="button"
-              class="btn btn-primary dropdown-toggle"
-            >
-              {{ selectDistrict }} <span class="caret"></span>
-            </button>
-            <ul *dropdownMenu class="dropdown-menu">
-              <li *ngFor="let item of districts">
-                <a class="dropdown-item" (click)="selectedDistrictFtn(item)">{{
-                  item.name
-                }}</a>
-              </li>
-            </ul>
+          <div class="d-flex justify-content-between flex-wrap">
+            <div>
+              <div class="btn-group" dropdown>
+                <button
+                  dropdownToggle
+                  type="button"
+                  class="btn btn-primary dropdown-toggle"
+                >
+                  {{ selectedCity }} <span class="caret"></span>
+                </button>
+                <ul *dropdownMenu class="dropdown-menu">
+                  <li *ngFor="let item of city">
+                    <a class="dropdown-item" (click)="selectedCityFtn(item)">{{
+                      item.name
+                    }}</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="btn-group" dropdown>
+                <button
+                  dropdownToggle
+                  type="button"
+                  class="btn btn-primary dropdown-toggle"
+                >
+                  {{ selectDistrict }} <span class="caret"></span>
+                </button>
+                <ul *dropdownMenu class="dropdown-menu">
+                  <li *ngFor="let item of districts">
+                    <a
+                      class="dropdown-item"
+                      (click)="selectedDistrictFtn(item)"
+                      >{{ item.name }}</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div>
+              <button type="button" class="btn btn-primary" (click)="clear()">
+                清除篩選
+              </button>
+            </div>
           </div>
           <div>
             <input
@@ -59,7 +70,7 @@
       </div>
     </div>
   </div>
-  <div class="col-xl-8">
+  <div class="col-xl-8 article-list">
     <app-box>
       <app-list-item
         *ngFor="let item of articlesList"

@@ -11,7 +11,7 @@ import {
   MessagesInfo,
 } from 'src/services/message.service';
 import { StorageService } from 'src/app/core/services/storage.service';
-import { Meta, Title } from '@angular/platform-browser';
+import { DomSanitizer, Meta, Title } from '@angular/platform-browser';
 import { CanonicalService } from 'src/app/core/services/canonical.service';
 import { SettingTags } from 'src/app/common/seo/setting-tags';
 
@@ -35,7 +35,8 @@ export class ArticleDetailComponent implements OnInit {
     private storage: StorageService,
     private tagService: Meta,
     private titleService: Title,
-    private canonicalService: CanonicalService
+    private canonicalService: CanonicalService,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -51,6 +52,13 @@ export class ArticleDetailComponent implements OnInit {
     this.articleService.getArticleDetail(this.articleId).subscribe(
       (resp) => {
         this.article = resp;
+        this.article.content = this.article.content.replace(
+          /\t/g,
+          '&nbsp&nbsp&nbsp&nbsp'
+        );
+        this.article.content = this.sanitizer.bypassSecurityTrustHtml(
+          this.article.content
+        ) as any;
         const settongSEO = new SettingTags(
           this.tagService,
           this.titleService,

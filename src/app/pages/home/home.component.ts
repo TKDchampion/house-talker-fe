@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ArticleInfo, ArticleService } from 'src/services/article.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {
@@ -14,6 +14,7 @@ import { Meta, Title } from '@angular/platform-browser';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class HomeComponent implements OnInit {
   articlesList: ArticleInfo[] = [];
@@ -46,6 +47,13 @@ export class HomeComponent implements OnInit {
       description:
         '這是一個專門收集黑心房東或壞房東及地雷飯店名宿的平台，避免以後租到的人踩雷，使社會變得佳和諧。',
     });
+  }
+
+  clear() {
+    this.selectedCity = '城市';
+    this.selectDistrict = '地區';
+    this.filterText = '';
+    this.filterFtn();
   }
 
   selectedCityFtn(item: CityModel) {

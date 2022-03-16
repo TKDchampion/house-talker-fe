@@ -68,6 +68,7 @@
         formControlName="content"
         [ngClass]="{ errorContent: !!articleForm.get('content')?.errors }"
         (onEditorCreated)="getEditorInstance($event)"
+        [preserveWhitespace]="true"
       ></quill-editor>
       <div class="form-text">
         可輸入內容如需插入圖片，請使用網址帶入，以後有錢在增加空間上傳功能。

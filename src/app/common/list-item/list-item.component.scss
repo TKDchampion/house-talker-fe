@@ -3,7 +3,6 @@
   border-bottom: solid 1px #5a68cb;
   font-size: 17px;
   padding: 10px;
-  cursor: pointer;
 }
 
 .list-item-box-label {
@@ -20,6 +19,7 @@
   height: 45px;
   overflow: hidden;
   text-overflow: ellipsis;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

@@ -23,8 +23,6 @@ export class ListItemComponent implements OnInit {
   ngOnInit(): void {}
 
   goUpdateOrDetail(pathName: 'article-page' | 'article-detail') {
-    console.log(pathName);
-
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate([`/app/${pathName}/${this.setting?.articleId}`]);
