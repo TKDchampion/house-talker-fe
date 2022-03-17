@@ -22,12 +22,12 @@ export class AppComponent implements OnInit {
       },
       {
         name: 'keywords',
-        content: 'house, rent, 租屋, 黑心房東, 房東',
+        content: 'house, rent, 租屋, 惡房東, 房東',
       },
       {
         name: 'description',
         content:
-          '這是一個專門收集黑心房東或壞房東及地雷飯店名宿的平台，避免以後租到的人踩雷，使社會變得佳和諧。',
+          '這是一個專門收集惡房東或地雷飯店名宿的平台，避免以後租到的人踩雷，改善租屋大環境，使社會變得佳和諧。',
       },
       {
         property: 'og:site_name',
@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
       {
         name: 'og:description',
         content:
-          '這是一個專門收集黑心房東或壞房東及地雷飯店名宿的平台，避免以後租到的人踩雷，使社會變得佳和諧。',
+          '這是一個專門收集惡房東或地雷飯店名宿的平台，避免以後租到的人踩雷，改善租屋大環境，使社會變得佳和諧。',
       },
       { name: 'og:title', content: 'HouseTalker' },
       {

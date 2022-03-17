@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
     settongSEO.addSEO({
       title: 'HouseTalker',
       description:
-        '這是一個專門收集黑心房東或壞房東及地雷飯店名宿的平台，避免以後租到的人踩雷，使社會變得佳和諧。',
+        '這是一個專門收集惡房東或地雷飯店名宿的平台，避免以後租到的人踩雷，改善租屋大環境，使社會變得佳和諧。',
     });
   }
 
