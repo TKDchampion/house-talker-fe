@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
       {
         name: 'description',
         content:
-          '這是一個專門收集惡房東或地雷飯店名宿的平台，避免以後租到的人踩雷，改善租屋大環境，使社會變得佳和諧。',
+          '這是一個專門收集惡房東或地雷飯店名宿的平台，讓有租房需求的人免於成為受害者，改善租屋大環境，使社會變得佳和諧。',
       },
       {
         property: 'og:site_name',
@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
       {
         name: 'og:description',
         content:
-          '這是一個專門收集惡房東或地雷飯店名宿的平台，避免以後租到的人踩雷，改善租屋大環境，使社會變得佳和諧。',
+          '這是一個專門收集惡房東或地雷飯店名宿的平台，讓有租房需求的人免於成為受害者，改善租屋大環境，使社會變得佳和諧。',
       },
       { name: 'og:title', content: 'HouseTalker' },
       {
