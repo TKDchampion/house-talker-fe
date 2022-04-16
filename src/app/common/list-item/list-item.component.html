@@ -10,8 +10,8 @@
     {{ setting?.summaryContent }}
   </div>
   <div class="list-item-box-footer d-flex justify-content-between">
-    <div>Reply: {{ setting?.countsComment }}</div>
-    <div>{{ setting?.nickName }} • {{ setting?.time }}</div>
+    <div>Reply: {{ setting?.replies }}</div>
+    <div>{{ setting?.nickName }} • {{ setting?.timeTw }}</div>
   </div>
   <div *ngIf="isControlBtn" class="text-end">
     <button
@@ -24,7 +24,7 @@
     <button
       type="button"
       class="btn btn-danger"
-      (click)="deleteBtn(setting?.articleId)"
+      (click)="deleteBtn(setting?.id)"
     >
       刪除
     </button>

@@ -13,44 +13,46 @@ export class MessageService extends ErrorServiceService {
     super(http, options, router);
   }
 
-  getMessagesForUser(id: string): Observable<MessagesInfo[]> {
-    return this.get('listComment', {
-      queryObject: { articleId: id },
-    });
+  getListByArticle(id: number): Observable<MessagesInfo[]> {
+    return this.get(`comment/getListByArticle/${id}`);
   }
 
   createMessage(param: createMessageParam) {
-    return this.post('createComment', {
+    return this.post('comment/create', {
       body: param,
     });
   }
 
-  updateMessage(id: string, param: createMessageParam) {
-    return this.put('updateComment', {
-      queryObject: { commentId: id },
+  updateMessage(id: number, param: updateMessageParam) {
+    return this.patch(`comment/update/${id}`, {
       body: param,
     });
   }
 
-  deleteMessage(id: string) {
-    return this.delete('deleteComment', {
-      queryObject: { commentId: id },
-    });
+  deleteMessage(id: number) {
+    return this.delete(`comment/delete/${id}`);
   }
 }
 
 export interface createMessageParam {
   content: string;
-  articleId: string;
+  articleId: number;
+  isHiddenName: boolean;
+}
+
+export interface updateMessageParam {
+  content: string;
+  isHiddenName: boolean;
 }
 
 export interface MessagesInfo {
   content: string;
-  userId: string;
-  time: string;
-  commentId: string;
+  userId: number;
+  timeTw: string;
+  id: number;
   nickName: string;
-  articleId: string;
+  articleId: number;
   isOwnMessage?: boolean;
+  isHiddenName: boolean;
   [key: string]: unknown;
 }

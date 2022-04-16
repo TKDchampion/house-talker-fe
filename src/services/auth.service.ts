@@ -14,35 +14,34 @@ export class AuthService extends ErrorServiceService {
   }
 
   login(param: LoginParam): Observable<LoginInfo> {
-    return this.post('login', { body: param });
+    return this.post('auth/login', { body: param });
   }
 
   sign(param: SingParam) {
-    return this.post('signUp', { body: param });
+    return this.post('auth/singup', { body: param });
   }
 
   activate(token: string) {
-    return this.post('activate', {
+    return this.post('auth/activate', {
       queryObject: { token: token },
     });
   }
 }
 
 export interface SingParam {
-  account: string;
+  email: string;
   password: string;
   nickName: string;
 }
 
 export interface LoginParam {
-  account: string;
+  email: string;
   password: string;
 }
 
 export interface LoginInfo {
   access_token: string;
-  account: string;
+  email: string;
   nickName: string;
-  token_type: string;
   userId: string;
 }

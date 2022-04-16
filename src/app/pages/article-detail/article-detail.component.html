@@ -2,7 +2,7 @@
   <div class="article-box">
     <div class="d-flex justify-content-between flex-wrap">
       <h1>{{ article?.title }}</h1>
-      <div>{{ article?.nickName }} • {{ article?.time }}</div>
+      <div>{{ article?.nickName }} • {{ article?.timeTw }}</div>
     </div>
     <div class="tips">{{ article?.location }} • {{ article?.tips }}</div>
     <div class="subtitle">{{ article?.summaryContent }}</div>
@@ -25,6 +25,16 @@
         留言
       </button>
     </div>
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        id="isHiddenName"
+        name="isHiddenName"
+        [(ngModel)]="checkboxHiddenName"
+      />
+      <label class="form-check-label" for="defaultCheck1"> 匿名請打勾 </label>
+    </div>
   </div>
 
   <div class="messages">
@@ -42,6 +52,18 @@
           rows="10"
           [(ngModel)]="item.content"
         ></textarea>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="isHiddenName"
+            name="isHiddenName"
+            [(ngModel)]="item.isHiddenName"
+          />
+          <label class="form-check-label" for="defaultCheck1">
+            匿名請打勾
+          </label>
+        </div>
       </div>
       <div class="text-end me-3">
         <div *ngIf="item.isOwnMessage">
@@ -68,7 +90,7 @@
             刪除
           </button>
         </div>
-        <div>{{ item.nickName }} • {{ item.time }}</div>
+        <div>{{ item.nickName }} • {{ item.timeTw }}</div>
       </div>
     </div>
   </div>

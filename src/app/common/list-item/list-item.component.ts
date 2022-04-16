@@ -25,7 +25,7 @@ export class ListItemComponent implements OnInit {
   goUpdateOrDetail(pathName: 'article-page' | 'article-detail') {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate([`/app/${pathName}/${this.setting?.articleId}`]);
+    this.router.navigate([`/app/${pathName}/${this.setting?.id}`]);
     this.modalService.hide();
   }
 

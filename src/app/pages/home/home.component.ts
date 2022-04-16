@@ -109,7 +109,7 @@ export class HomeComponent implements OnInit {
           item.city = locationSplit[0];
           item.district = locationSplit[1];
         });
-        this.articlesList.sort((a, b) => (a.time > b.time ? -1 : 1));
+        this.articlesList.sort((a, b) => (a.timeTw > b.timeTw ? -1 : 1));
         this.defalutArticlesList = JSON.parse(
           JSON.stringify(this.articlesList)
         );

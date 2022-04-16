@@ -9,6 +9,7 @@ import {
   createMessageParam,
   MessageService,
   MessagesInfo,
+  updateMessageParam,
 } from 'src/services/message.service';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { DomSanitizer, Meta, Title } from '@angular/platform-browser';
@@ -24,8 +25,9 @@ export class ArticleDetailComponent implements OnInit {
   article?: ArticleDetailInfo;
   messages?: MessagesInfo[];
   inputMessage = '';
+  checkboxHiddenName = false;
   userId?: any;
-  articleId = '';
+  articleId: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,7 +42,7 @@ export class ArticleDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.articleId = this.route.snapshot.paramMap.get('id') as string;
+    this.articleId = Number(this.route.snapshot.paramMap.get('id'));
     if (this.articleId) {
       this.getArticleDetail();
     }
@@ -77,10 +79,10 @@ export class ArticleDetailComponent implements OnInit {
   }
 
   getMessageList() {
-    this.messageService.getMessagesForUser(this.articleId).subscribe(
+    this.messageService.getListByArticle(this.articleId).subscribe(
       (resp) => {
         this.messages = resp;
-        this.messages.sort((a, b) => (a.time > b.time ? -1 : 1));
+        this.messages.sort((a, b) => (a.timeTw > b.timeTw ? -1 : 1));
         this.messages.forEach(
           (i) => (i.isOwnMessage = i.userId === this.userId)
         );
@@ -96,22 +98,29 @@ export class ArticleDetailComponent implements OnInit {
     const param: createMessageParam = {
       content: this.inputMessage,
       articleId: this.articleId,
+      isHiddenName: this.checkboxHiddenName,
     };
     this.spinnerService.show();
-    this.messageService.createMessage(param).subscribe(() => {
-      this.inputMessage = '';
-      this.getMessageList();
-    });
+    this.messageService.createMessage(param).subscribe(
+      () => {
+        this.inputMessage = '';
+        this.checkboxHiddenName = false;
+        this.getMessageList();
+      },
+      () => {
+        this.spinnerService.hide();
+      }
+    );
   }
 
   updataMessage(item: MessagesInfo) {
     if (item.openState) {
       this.spinnerService.show();
-      const param: createMessageParam = {
+      const param: updateMessageParam = {
         content: item.content,
-        articleId: this.articleId,
+        isHiddenName: item.isHiddenName,
       };
-      this.messageService.updateMessage(item.commentId, param).subscribe(
+      this.messageService.updateMessage(item.id, param).subscribe(
         () => {
           item.openState = false;
           this.getMessageList();
@@ -129,7 +138,7 @@ export class ArticleDetailComponent implements OnInit {
 
   deleteMessage(item: MessagesInfo) {
     this.spinnerService.show();
-    this.messageService.deleteMessage(item.commentId).subscribe(
+    this.messageService.deleteMessage(item.id).subscribe(
       () => {
         this.getMessageList();
       },

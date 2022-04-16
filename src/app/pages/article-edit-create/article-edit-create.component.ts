@@ -2,7 +2,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { StorageService } from 'src/app/core/services/storage.service';
 import {
   ArticleService,
   CreateArticleParams,
@@ -31,18 +30,17 @@ export class ArticleEditCreateComponent implements OnInit {
     content: ['', [Validators.required]],
     isHiddenName: [false, [Validators.required]],
   });
-  articleId: string;
+  articleId: number;
 
   constructor(
     private fb: FormBuilder,
-    private storage: StorageService,
     private articleService: ArticleService,
     private spinner: NgxSpinnerService,
     private router: Router,
     private route: ActivatedRoute,
     private canonicalService: CanonicalService
   ) {
-    this.articleId = this.route.snapshot.paramMap.get('id') as string;
+    this.articleId = this.route.snapshot.paramMap.get('id') as any;
   }
 
   ngOnInit(): void {
@@ -76,32 +74,7 @@ export class ArticleEditCreateComponent implements OnInit {
 
   getEditorInstance(editorInstance: any) {
     this.quill = editorInstance;
-    const toolbar = editorInstance.getModule('toolbar');
-    toolbar.addHandler('image', this.showImage);
-    toolbar.addHandler('link', this.showlink);
   }
-
-  showlink() {
-    const range = this.quill.getSelection();
-    const text = this.quill.getText(
-      range.index,
-      range.index + (range.length - 1)
-    );
-    const value = prompt('please copy paste the image url here.');
-    if (value) {
-      this.quill.insertText(range, text, 'link', value);
-    }
-  }
-
-  showImage() {
-    var range = this.quill.getSelection();
-    var value = prompt('please copy paste the image url here.');
-    if (value) {
-      this.quill.insertEmbed(range.index, 'image', value);
-    }
-  }
-
-  createArticle() {}
 
   onSubmit() {
     if (this.articleForm.valid) {
@@ -112,7 +85,6 @@ export class ArticleEditCreateComponent implements OnInit {
         location: `${this.articleForm.get('cityName')?.value} ${
           this.articleForm.get('districts')?.value
         }`,
-        nickName: this.storage.get('nickName') as any,
         summaryContent: this.articleForm.get('summaryContent')?.value,
         tips: this.articleForm.get('tips')?.value,
         isHiddenName: this.articleForm.get('isHiddenName')?.value,

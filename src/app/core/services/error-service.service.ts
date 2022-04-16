@@ -28,8 +28,8 @@ export class ErrorServiceService extends BaseService {
     return super.post(url, httpOptions).pipe(this.handlerAuthError());
   }
 
-  put(url: string, httpOptions?: HttpRequestOptions): any {
-    return super.put(url, httpOptions).pipe(this.handlerAuthError());
+  patch(url: string, httpOptions?: HttpRequestOptions): any {
+    return super.patch(url, httpOptions).pipe(this.handlerAuthError());
   }
 
   delete(url: string, httpOptions?: HttpRequestOptions): any {

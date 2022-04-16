@@ -13,44 +13,38 @@ export class ArticleService extends ErrorServiceService {
     super(http, options, router);
   }
 
-  getArticleDetail(id: string): Observable<ArticleDetailInfo> {
-    return this.get('getDetailsArticle', {
-      queryObject: { articleId: id },
-    });
+  getArticleDetail(id: number): Observable<ArticleDetailInfo> {
+    return this.get(`article/getDetailById/${id}`);
   }
 
   getAllNewsArticles(): Observable<ArticleInfo[]> {
-    return this.get('getAllNewsArticles');
+    return this.get('article/getAllNews');
   }
 
   getArticleForUser(): Observable<ArticleInfo[]> {
-    return this.get('getArticeForUser');
+    return this.get('article/getByUser');
   }
 
   createArticle(params: CreateArticleParams) {
-    return this.post('createArticle', {
+    return this.post('article/create', {
       body: params,
     });
   }
 
-  updateArticle(id: string, params: CreateArticleParams) {
-    return this.put('updateArticle', {
-      queryObject: { articleId: id },
+  updateArticle(id: number, params: CreateArticleParams) {
+    return this.patch(`article/update/${id}`, {
       body: params,
     });
   }
 
   deleteArticle(id: string) {
-    return this.delete('deleteArticle', {
-      queryObject: { articleId: id },
-    });
+    return this.delete(`article/delete/${id}`);
   }
 }
 
 export interface CreateArticleParams {
   content: string;
   location: string;
-  nickName: string;
   summaryContent: string;
   tips: string;
   title: string;
@@ -58,20 +52,20 @@ export interface CreateArticleParams {
 }
 
 export interface ArticleInfo {
-  time: string;
+  timeTw: string;
   summaryContent: string;
   location: string;
-  articleId: string;
+  id: string;
   userId: string;
   nickName: string;
   tips: string;
   title: string;
-  countsComment: number;
+  replies: number;
   [key: string]: any;
 }
 
 export interface ArticleDetailInfo {
-  time: string;
+  timeTw: string;
   summaryContent: string;
   content: string;
   location: string;

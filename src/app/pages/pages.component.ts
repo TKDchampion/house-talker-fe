@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -21,12 +21,12 @@ export class PagesComponent implements OnInit {
   modalRef?: BsModalRef;
   errorMessage = '';
   loginForm = this.formBuilder.group({
-    account: ['', Validators.required],
+    email: ['', Validators.required],
     password: ['', Validators.required],
   });
 
   signForm = this.formBuilder.group({
-    account: ['', Validators.required],
+    email: ['', Validators.required],
     password: ['', Validators.required],
     nickName: ['', Validators.required],
   });
@@ -66,6 +66,7 @@ export class PagesComponent implements OnInit {
     if (form.status === 'VALID') {
       this.spinner.show();
       isLogin ? this.login(form) : this.sign(form);
+      window.location.reload();
     }
   }
 
@@ -105,7 +106,7 @@ export class PagesComponent implements OnInit {
         this.spinner.hide();
         this.modalRef?.hide();
         this.loginForm.patchValue({
-          account: '',
+          email: '',
           password: '',
         });
       },
@@ -114,7 +115,7 @@ export class PagesComponent implements OnInit {
         this.isLogin = false;
         this.errorMessage = '帳密錯誤';
         this.loginForm.patchValue({
-          account: '',
+          email: '',
           password: '',
         });
       }
@@ -123,7 +124,7 @@ export class PagesComponent implements OnInit {
 
   private setPersonal(info: LoginInfo) {
     this.storage.set('access_token', info.access_token);
-    this.storage.set('account', info.account);
+    this.storage.set('email', info.email);
     this.storage.set('nickName', info.nickName);
     this.storage.set('userId', info.userId);
     this.isLogin = true;
