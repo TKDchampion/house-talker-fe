@@ -1,2 +1,3 @@
 # HouseTalkerFe
-practice usong SSR deploy on firebase
+
+practice usong SSR deploy on docker

@@ -6,17 +6,13 @@ RUN npm cache clean --force
 RUN npm i
 COPY . .
 
-RUN npm run prerender
-RUN cd /usr/src/app/dist/functions/browser
+RUN npm run build:ssr
 
 ### STAGE 2: Run ###
-FROM nginx AS final
-### Do note the project name, as 'ng build or npm run build'
-### will create the directory structure like this
-### /dist/your-project-name
-COPY --from=build /usr/src/app/dist/functions/browser /usr/share/nginx/html
+FROM node:14.15
+COPY --from=build /usr/src/app/node_modules ./node_modules
+COPY --from=build /usr/src/app/package*.json ./
+COPY --from=build /usr/src/app/dist ./dist
 
-# 覆蓋image裡的設定檔
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
-
-CMD ["nginx", "-g", "daemon off;"]
+# CMD [ "node", "dist/house-talker-fe/server/main.js" ]
+CMD ["npm", "run", "serve:ssr"]

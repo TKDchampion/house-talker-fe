@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseApiUrl: 'https://us-central1-talker-9f1f9.cloudfunctions.net/webApi/',
+  baseApiUrl: 'http://172.25.0.108:3333/api/v1/',
 };

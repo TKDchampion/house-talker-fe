@@ -15,11 +15,7 @@ global['localStorage'] = localStorage;
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
   const server = express();
-  // const distFolder = join(process.cwd(), 'dist/functions/browser');
-  const websiteFileLocation = environment.production
-    ? 'browser'
-    : 'dist/functions/browser';
-  const distFolder = join(process.cwd(), websiteFileLocation);
+  const distFolder = join(process.cwd(), 'dist/house-talker-fe/browser');
   const indexHtml = existsSync(join(distFolder, 'index.original.html'))
     ? 'index.original.html'
     : 'index';
