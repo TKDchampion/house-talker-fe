@@ -8,6 +8,7 @@ import {
 } from 'src/services/article.service';
 import { cityData, DistrictModel, quillSetting } from './article-edit.model';
 import { CanonicalService } from 'src/app/core/services/canonical.service';
+import { StorageService } from 'src/app/core/services/storage.service';
 @Component({
   selector: 'app-article-edit-create',
   templateUrl: './article-edit-create.component.html',
@@ -38,9 +39,17 @@ export class ArticleEditCreateComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private router: Router,
     private route: ActivatedRoute,
-    private canonicalService: CanonicalService
+    private canonicalService: CanonicalService,
+    private storage: StorageService
   ) {
     this.articleId = this.route.snapshot.paramMap.get('id') as any;
+    const isLogin = this.storage.hasItem('access_token');
+
+    if (!isLogin) {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate([`/app`]);
+    }
   }
 
   ngOnInit(): void {
