@@ -67,7 +67,6 @@ export class PagesComponent implements OnInit {
     if (form.status === 'VALID') {
       this.spinner.show();
       isLogin ? this.login(form) : this.sign(form);
-      window.location.reload();
     }
   }
 
@@ -110,11 +109,15 @@ export class PagesComponent implements OnInit {
           email: '',
           password: '',
         });
+        window.location.reload();
       },
-      () => {
+      (error: HttpErrorResponse) => {
+        console.log(error);
+        const errorInfo = error.error;
+        this.errorMessage =
+          errorInfo.statusCode === 401 ? '帳密錯誤' : errorInfo.message;
         this.spinner.hide();
         this.isLogin = false;
-        this.errorMessage = '帳密錯誤';
         this.loginForm.patchValue({
           email: '',
           password: '',
