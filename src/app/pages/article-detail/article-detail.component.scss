@@ -33,7 +33,7 @@
 .speech-bubble-right,
 .speech-bubble-left {
   position: relative;
-  background: #00aabb;
+  background: rgb(232 232 232);
   border-radius: 0.4em;
   min-height: 100px;
   margin: 20px;
@@ -55,14 +55,14 @@
   right: 0;
   border-right: 0;
   margin-right: -20px;
-  border-left-color: #00aabb;
+  border-left-color: rgb(232 232 232);
 }
 
 .speech-bubble-left:after {
   left: 0;
   border-left: 0;
   margin-left: -20px;
-  border-right-color: #00aabb;
+  border-right-color: rgb(232 232 232);
 }
 
 .messages textarea {
