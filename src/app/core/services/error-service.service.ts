@@ -43,9 +43,31 @@ export class ErrorServiceService extends BaseService {
         this.router.onSameUrlNavigation = 'reload';
         this.router.navigate(['/app']);
         localStorage.clear();
+        this.hideAll();
         return of();
       }
       throw e;
     });
+  }
+
+  private hideAll(): void {
+    //try to hide all active modals
+    const openModals = document.querySelectorAll('.modal.in');
+    if (openModals) {
+      for (let i = 0; i < openModals.length; i++) {
+        //Get the modal-header of the modal
+        const modalHeader =
+          openModals[i].getElementsByClassName('modal-header');
+        if (modalHeader && modalHeader.length > 0) {
+          //Get the close button in the modal header
+          const closeButton: any =
+            modalHeader[0].getElementsByTagName('BUTTON');
+          if (closeButton && closeButton.length > 0) {
+            //simulate click on close button
+            closeButton[0].click();
+          }
+        }
+      }
+    }
   }
 }

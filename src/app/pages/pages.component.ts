@@ -42,7 +42,6 @@ export class PagesComponent implements OnInit {
     private router: Router
   ) {
     this.isLogin = this.storage && this.storage.hasItem('access_token');
-    !this.isLogin && this.modalService.hide();
     this.isLogin && (this.accountName = this.storage.get('nickName') as any);
   }
 
