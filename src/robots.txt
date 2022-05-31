@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://house-talker.com/sitemap.txt
